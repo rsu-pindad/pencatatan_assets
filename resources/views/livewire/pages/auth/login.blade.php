@@ -30,9 +30,9 @@ $login = function () {
     <form wire:submit="login">
         <!-- Email Address -->
         <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input wire:model="form.email" id="email" class="block mt-1 w-full" type="email" name="email" required autofocus autocomplete="username" />
-            <x-input-error :messages="$errors->get('form.email')" class="mt-2" />
+            <x-input-label for="npp" :value="__('NPP')" />
+            <x-text-input wire:model="form.npp" id="npp" class="block mt-1 w-full" type="text" name="npp" required autofocus autocomplete="npp" />
+            <x-input-error :messages="$errors->get('form.npp')" class="mt-2" />
         </div>
 
         <!-- Password -->
