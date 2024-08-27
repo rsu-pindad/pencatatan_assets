@@ -40,8 +40,8 @@ Route::group(['middleware' => ['role:kabag']], function () {
         Route::get('data-kode', [DataMasterController::class,                 'getKode'])->name('data-kode');
         Route::get('data-vendor', [DataMasterController::class,               'getVendor'])->name('data-vendor');
         Route::get('data-satuan', [DataMasterController::class,               'getSatuan'])->name('data-satuan');
-        Route::get('data-tipe-merek', [DataMasterController::class,           'getTipeMerek'])->name('data-tipe-merek');
-        Route::get('data-tipe-merek-name/{id}', [DataMasterController::class, 'getTipeMerekName'])->name('data-tipe-merek-name');
+        // Route::get('data-tipe-merek', [DataMasterController::class,           'getTipeMerek'])->name('data-tipe-merek');
+        // Route::get('data-tipe-merek-name/{id}', [DataMasterController::class, 'getTipeMerekName'])->name('data-tipe-merek-name');
         Route::get('data-unit', [DataMasterController::class,                 'getUnit'])->name('data-unit');
     });
 })->middleware(['auth']);

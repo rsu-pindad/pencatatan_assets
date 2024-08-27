@@ -67,7 +67,6 @@ title('Master Aset');
     </div>
   </div>
   <!-- End Flex -->
-
 </div>
 
 @once
@@ -91,66 +90,20 @@ title('Master Aset');
   @push('customModal')
     <livewire:master-aset.aset-form lazy
                                     wire:key="{{ uniqid() }}" />
-    {{-- <livewire:master-kode.kode-update-form lazy /> --}}
   @endpush
 
   @push('customScript')
-    <script type="module" data-navigate-track>
-      Livewire.on('infoNotifikasiInsert', async (event) => {
-        await Livewire.dispatch('pg:eventRefresh-kode');
-        $closeModal('createModal');
-        $wireui.notify({
-          title: event.title,
-          description: event.description,
-          icon: event.icon,
-        });
-      });
+    <script type="module">
       Livewire.on('infoNotifikasi', async (event) => {
-        await Livewire.dispatch('pg:eventRefresh-kode');
+        await Livewire.dispatch('pg:eventRefresh-aset');
         $wireui.notify({
           title: event.title,
           description: event.description,
           icon: event.icon,
         });
       });
-
       Livewire.on('create', (event) => {
         $openModal('createModal');
-      });
-      Livewire.on('edit', (event) => {
-        // console.log(event);
-        $openModal('editModal');
-      });
-      Livewire.on('hapus', async (event) => {
-        await Livewire.dispatch('executeHapus', {
-          rowId: event
-        });
-        Livewire.dispatch('pg:eventRefresh-kode');
-      });
-      Livewire.on('pulihkan', async (event) => {
-        await Livewire.dispatch('executePulihkan', {
-          rowId: event
-        });
-        Livewire.dispatch('pg:eventRefresh-kode');
-      });
-      Livewire.on('closeEditModal', () => {
-        $closeModal('editModal');
-      });
-      Livewire.on('permanenDelete', async (event) => {
-        window.$wireui.confirmDialog({
-          title: 'Permanent Delete',
-          description: 'anda yakin ? data akan dihapus dari database & tidak dapat dikembalikan',
-          icon: 'warning',
-          accept: {
-            label: 'iya',
-            execute: () => Livewire.dispatch('executePermanentHapus', {
-              rowId: event
-            })
-          },
-          reject: {
-            label: 'batal',
-          }
-        });
       });
     </script>
   @endpush
