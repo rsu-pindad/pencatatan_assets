@@ -4,13 +4,14 @@ use App\Http\Controllers\DataMasterController;
 use Illuminate\Support\Facades\Route;
 use Livewire\Volt\Volt;
 
-Route::view('/', 'welcome');
+// Route::view('/', 'welcome');
+Volt::route('/', 'beranda')->name('beranda');
 
 Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])
     ->name('dashboard');
 
-Route::view('profile', 'profile')
+Volt::route('profile', 'profile')
     ->middleware(['auth'])
     ->name('profile');
 
