@@ -95,7 +95,7 @@ title('Master Aset');
   @endpush
 
   @push('customScript')
-    <script type="module">
+    <script type="module" data-navigate-track>
       Livewire.on('infoNotifikasiInsert', async (event) => {
         await Livewire.dispatch('pg:eventRefresh-kode');
         $closeModal('createModal');

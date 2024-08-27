@@ -95,7 +95,7 @@ title('Master Satuan');
   @endpush
 
   @push('customScript')
-    <script type="module">
+    <script type="module" data-navigate-track>
       Livewire.on('infoNotifikasi', async (event) => {
         await Livewire.dispatch('pg:eventRefresh-satuan');
         $wireui.notify({
