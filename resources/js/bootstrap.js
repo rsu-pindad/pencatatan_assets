@@ -37,5 +37,5 @@ import flatpickr from "flatpickr";
 window.Livewire = Livewire;
 window.Alpine = Alpine;
 window.flatpickr = flatpickr;
-Alpine.start();
-Livewire.start();
+// Alpine.start();
+// Livewire.start();
