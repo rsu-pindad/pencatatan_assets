@@ -36,7 +36,8 @@ $insert = action(function () {
       <!-- End Header -->
 
       <div class="my-6">
-        <form wire:submit="insert" enctype="multipart/form-data">
+        <form wire:submit="insert"
+              enctype="multipart/form-data">
           <div class="grid grid-cols-2 grid-rows-3 gap-6">
             <div class="inline-flex">
               <x-wireui-select wire:model="form.kode"
@@ -111,11 +112,13 @@ $insert = action(function () {
               <label for="hs-select-label"
                      class="mb-2 block text-sm font-medium dark:text-white">Pilih Tipe/Merek</label>
               <select id="hs-select-label"
-                      wire:model="form.tipeMerek"
+                      wire:model.live="form.tipeMerek"
                       class="block w-full rounded-lg border-gray-200 px-4 py-3 pe-9 text-sm focus:border-blue-500 focus:ring-blue-500 disabled:pointer-events-none disabled:opacity-50 dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
+                <option hidden>Pilih Tipe/Merek</option>
                 @forelse (TipeMerek::with(['parentTipe', 'parentMerek'])->get() as $tipeMerek)
                   <option value="{{ $tipeMerek->id }}">
-                    {{ $tipeMerek->parentTipe->nama_tipe }}/
+                    {{ $tipeMerek->parentTipe->nama_tipe }}
+                    -
                     {{ $tipeMerek->parentMerek->nama_merek }}
                   </option>
                 @empty
