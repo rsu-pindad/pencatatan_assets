@@ -68,13 +68,18 @@ $insert = action(function () {
                                         without-time-seconds />
             </div>
             <div class="inline-flex">
-              <x-wireui-input wire:model="form.nilai"
+              <x-wireui-currency wire:model="form.nilai"
                               with-validation-colors=true
                               corner="min:Rp.0"
                               label="Nilai Perolehan Aset"
                               placeholder="masukan nilai"
                               prefix="Rp."
-                              type="text" />
+                              decimal=","
+                              thousands="."
+                              emit-formatted="true"
+                              max="10000000000"
+                              min="0"
+                              />
             </div>
             <div class="inline-flex">
               <x-wireui-number wire:model="form.jumlah"
