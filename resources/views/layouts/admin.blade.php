@@ -63,10 +63,11 @@
           <a class="inline-block flex-none rounded-xl text-xl font-semibold focus:opacity-80 focus:outline-none"
              href="#"
              aria-label="Preline">
-             <span class="inline-flex items-center gap-x-2 text-xl font-semibold text-green-500 hover:text-green-700 dark:text-white dark:hover:text-gray-400 uppercase">
-               <x-heroicons::solid.presentation-chart-line class="h-auto w-auto fill-green-500 hover:fill-green-700" />
-               Inventaris
-             </span>
+            <span
+                  class="inline-flex items-center gap-x-2 text-xl font-semibold uppercase text-green-500 hover:text-green-700 dark:text-white dark:hover:text-gray-400">
+              <x-heroicons::solid.presentation-chart-line class="h-auto w-auto fill-green-500 hover:fill-green-700" />
+              Inventaris
+            </span>
           </a>
           <!-- End Logo -->
         </div>
@@ -98,6 +99,10 @@
         // event.defaultPrevented:true;
         // console.log(event);
       });
+      // document.addEventListener('livewire:load', function() {
+      //   Livewire.off();
+      //   console.log('listener off');
+      // });
       Wireui.hook('load', () => console.log('wireui ok'));
     </script>
     @stack('customModal')
