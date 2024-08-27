@@ -36,7 +36,7 @@ $insert = action(function () {
       <!-- End Header -->
 
       <div class="my-6">
-        <form wire:submit="insert">
+        <form wire:submit="insert" enctype="multipart/form-data">
           <div class="grid grid-cols-2 grid-rows-3 gap-6">
             <div class="inline-flex">
               <x-wireui-select wire:model="form.kode"
@@ -69,17 +69,16 @@ $insert = action(function () {
             </div>
             <div class="inline-flex">
               <x-wireui-currency wire:model="form.nilai"
-                              with-validation-colors=true
-                              corner="min:Rp.0"
-                              label="Nilai Perolehan Aset"
-                              placeholder="masukan nilai"
-                              prefix="Rp."
-                              decimal=","
-                              thousands="."
-                              emit-formatted="true"
-                              max="10000000000"
-                              min="0"
-                              />
+                                 with-validation-colors=true
+                                 corner="min:Rp.0"
+                                 label="Nilai Perolehan Aset"
+                                 placeholder="masukan nilai"
+                                 prefix="Rp."
+                                 decimal=","
+                                 thousands="."
+                                 emit-formatted="true"
+                                 max="10000000000"
+                                 min="0" />
             </div>
             <div class="inline-flex">
               <x-wireui-number wire:model="form.jumlah"
