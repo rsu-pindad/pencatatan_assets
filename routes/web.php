@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 use Livewire\Volt\Volt;
 
 // Route::view('/', 'welcome');
-Volt::route('/', 'beranda')->name('beranda');
+Volt::route('/', 'beranda')->middleware(['auth'])->name('beranda');
 
 Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])
