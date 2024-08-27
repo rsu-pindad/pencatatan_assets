@@ -58,7 +58,7 @@ title('Master Aset');
           <!-- End Header Table -->
           <div class="p-4"
                wire:ignore.self>
-            <livewire:aset-table lazy />
+            <livewire:aset-table lazy wire:key="{{uniqid()}}" />
           </div>
 
         </div>
@@ -87,7 +87,7 @@ title('Master Aset');
 @endpush
 
 @push('customModal')
-  <livewire:master-aset.aset-form lazy />
+  <livewire:master-aset.aset-form lazy wire:key="{{uniqid()}}" />
   {{-- <livewire:master-kode.kode-update-form lazy /> --}}
 @endpush
 

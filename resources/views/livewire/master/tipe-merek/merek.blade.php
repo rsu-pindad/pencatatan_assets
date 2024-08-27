@@ -24,7 +24,7 @@ title('Master merek');
 
     <div class="grid gap-4 p-2 sm:grid-cols-2 sm:gap-6 lg:grid-cols-4">
       <!-- Card -->
-      <livewire:master-tipe-merek.merek-widget />
+      <livewire:master-tipe-merek.merek-widget wire:key="{{uniqid()}}" />
       <!-- End Card -->
     </div>
   </div>
@@ -60,7 +60,7 @@ title('Master merek');
           <!-- End Header Table -->
           <div class="p-4"
                wire:ignore.self>
-            <livewire:merek-table lazy />
+            <livewire:merek-table lazy wire:key="{{uniqid()}}" />
           </div>
 
         </div>
@@ -94,8 +94,8 @@ title('Master merek');
 @endpush
 
 @push('customModal')
-  <livewire:master-tipe-merek.merek-form lazy />
-  <livewire:master-tipe-merek.merek-update-form lazy />
+  <livewire:master-tipe-merek.merek-form lazy wire:key="{{uniqid()}}" />
+  <livewire:master-tipe-merek.merek-update-form lazy wire:key="{{uniqid()}}" />
 @endpush
 
 @push('customScript')

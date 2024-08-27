@@ -23,7 +23,7 @@ title('Master Vendor');
        aria-labelledby="collapse-widget">
   <div class="grid gap-4 p-2 sm:grid-cols-2 sm:gap-6 lg:grid-cols-4">
     <!-- Card -->
-    <livewire:master-vendor.vendor-widget />
+    <livewire:master-vendor.vendor-widget wire:key="{{uniqid()}}" />
     <!-- End Card -->
   </div>
   </div>
@@ -59,7 +59,7 @@ title('Master Vendor');
           <!-- End Header Table -->
           <div class="p-4"
                wire:ignore.self>
-            <livewire:vendor-table lazy />
+            <livewire:vendor-table lazy wire:key="{{uniqid()}}" />
           </div>
 
         </div>
@@ -87,8 +87,8 @@ title('Master Vendor');
 @endpush
 
 @push('customModal')
-  <livewire:master-vendor.vendor-form lazy />
-  <livewire:master-vendor.vendor-update-form lazy />
+  <livewire:master-vendor.vendor-form lazy wire:key="{{uniqid()}}" />
+  <livewire:master-vendor.vendor-update-form lazy wire:key="{{uniqid()}}" />
 @endpush
 
 @push('customScript')

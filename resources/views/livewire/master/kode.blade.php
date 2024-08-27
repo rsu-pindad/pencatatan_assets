@@ -23,11 +23,11 @@ title('Master Kode');
        aria-labelledby="collapse-widget">
     <div class="ld:grid-cols-5 grid gap-4 p-2 sm:grid-cols-2 sm:gap-6 md:grid-cols-3">
       <!-- Card -->
-      <livewire:master-kode.kode-widget-now />
-      <livewire:master-kode.kode-widget-month />
-      <livewire:master-kode.kode-widget-year />
-      <livewire:master-kode.kode-widget />
-      <livewire:master-kode.kode-widget-trash />
+      <livewire:master-kode.kode-widget-now wire:key="{{uniqid()}}" />
+      <livewire:master-kode.kode-widget-month wire:key="{{uniqid()}}" />
+      <livewire:master-kode.kode-widget-year wire:key="{{uniqid()}}" />
+      <livewire:master-kode.kode-widget wire:key="{{uniqid()}}" />
+      <livewire:master-kode.kode-widget-trash wire:key="{{uniqid()}}" />
       <!-- End Card -->
     </div>
   </div>
@@ -92,8 +92,8 @@ title('Master Kode');
 @endpush
 
 @push('customModal')
-  <livewire:master-kode.kode-form lazy />
-  <livewire:master-kode.kode-update-form lazy />
+  <livewire:master-kode.kode-form lazy wire:key="{{uniqid()}}" />
+  <livewire:master-kode.kode-update-form lazy wire:key="{{uniqid()}}" />
 @endpush
 
 @push('customScript')

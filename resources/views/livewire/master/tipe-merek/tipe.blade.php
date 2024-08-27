@@ -23,7 +23,7 @@ title('Master Tipe');
        aria-labelledby="collapse-widget">
   <div class="grid gap-4 p-2 sm:grid-cols-2 sm:gap-6 lg:grid-cols-4">
     <!-- Card -->
-    <livewire:master-tipe-merek.tipe-widget />
+    <livewire:master-tipe-merek.tipe-widget wire:key="{{uniqid()}}" />
     <!-- End Card -->
   </div>
   </div>
@@ -59,7 +59,7 @@ title('Master Tipe');
           <!-- End Header Table -->
           <div class="p-4"
                wire:ignore.self>
-            <livewire:tipe-table lazy />
+            <livewire:tipe-table lazy wire:key="{{uniqid()}} />
           </div>
 
         </div>
@@ -93,8 +93,8 @@ title('Master Tipe');
 @endpush
 
 @push('customModal')
-  <livewire:master-tipe-merek.tipe-form lazy />
-  <livewire:master-tipe-merek.tipe-update-form lazy />
+  <livewire:master-tipe-merek.tipe-form lazy wire:key="{{uniqid()}}" />
+  <livewire:master-tipe-merek.tipe-update-form lazy wire:key="{{uniqid()}}" />
 @endpush
 
 @push('customScript')

@@ -23,7 +23,7 @@ title('Master Satuan');
        aria-labelledby="collapse-widget">
     <div class="ld:grid-cols-5 grid gap-4 p-2 sm:grid-cols-2 sm:gap-6 md:grid-cols-3">
       <!-- Card -->
-      <livewire:master-satuan.satuan-widget />
+      <livewire:master-satuan.satuan-widget wire:key="{{uniqid()}}" />
       <!-- End Card -->
     </div>
   </div>
@@ -87,8 +87,8 @@ title('Master Satuan');
 @endpush
 
 @push('customModal')
-  <livewire:master-satuan.satuan-form lazy />
-  <livewire:master-satuan.satuan-update-form lazy />
+  <livewire:master-satuan.satuan-form lazy wire:key="{{uniqid()}}" />
+  <livewire:master-satuan.satuan-update-form lazy wire:key="{{uniqid()}}" />
 @endpush
 
 @push('customScript')
