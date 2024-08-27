@@ -23,11 +23,11 @@ title('Master Kode');
        aria-labelledby="collapse-widget">
     <div class="ld:grid-cols-5 grid gap-4 p-2 sm:grid-cols-2 sm:gap-6 md:grid-cols-3">
       <!-- Card -->
-      <livewire:master-kode.kode-widget-now wire:key="{{uniqid()}}" />
-      <livewire:master-kode.kode-widget-month wire:key="{{uniqid()}}" />
-      <livewire:master-kode.kode-widget-year wire:key="{{uniqid()}}" />
-      <livewire:master-kode.kode-widget wire:key="{{uniqid()}}" />
-      <livewire:master-kode.kode-widget-trash wire:key="{{uniqid()}}" />
+      <livewire:master-kode.kode-widget-now wire:key="{{ uniqid() }}" />
+      <livewire:master-kode.kode-widget-month wire:key="{{ uniqid() }}" />
+      <livewire:master-kode.kode-widget-year wire:key="{{ uniqid() }}" />
+      <livewire:master-kode.kode-widget wire:key="{{ uniqid() }}" />
+      <livewire:master-kode.kode-widget-trash wire:key="{{ uniqid() }}" />
       <!-- End Card -->
     </div>
   </div>
@@ -74,120 +74,124 @@ title('Master Kode');
 
 </div>
 
-@push('breadcrumb')
-  <x-preline.breadcrumb>
-    <x-slot:content>
-      <li class="flex items-center text-sm text-gray-800 dark:text-neutral-400"
-          aria-current="page">
-        Master
-        <x-heroicons::solid.chevron-right
-                                          class="size-4 mx-3 h-4 w-4 shrink-0 overflow-visible text-gray-400 dark:text-neutral-500" />
-      </li>
-      <li class="truncate text-sm font-semibold text-gray-800 dark:text-neutral-400"
-          aria-current="page">
-        Kode
-      </li>
-    </x-slot:content>
-  </x-preline.breadcrumb>
-@endpush
+@once
+  @push('breadcrumb')
+    <x-preline.breadcrumb>
+      <x-slot:content>
+        <li class="flex items-center text-sm text-gray-800 dark:text-neutral-400"
+            aria-current="page">
+          Master
+          <x-heroicons::solid.chevron-right
+                                            class="size-4 mx-3 h-4 w-4 shrink-0 overflow-visible text-gray-400 dark:text-neutral-500" />
+        </li>
+        <li class="truncate text-sm font-semibold text-gray-800 dark:text-neutral-400"
+            aria-current="page">
+          Kode
+        </li>
+      </x-slot:content>
+    </x-preline.breadcrumb>
+  @endpush
 
-@push('customModal')
-  <livewire:master-kode.kode-form lazy wire:key="{{uniqid()}}" />
-  <livewire:master-kode.kode-update-form lazy wire:key="{{uniqid()}}" />
-@endpush
+  @push('customModal')
+    <livewire:master-kode.kode-form lazy
+                                    wire:key="{{ uniqid() }}" />
+    <livewire:master-kode.kode-update-form lazy
+                                           wire:key="{{ uniqid() }}" />
+  @endpush
 
-@push('customScript')
-  <script type="module">
-    Livewire.on('infoNotifikasi', async (event) => {
-      await Livewire.dispatch('pg:eventRefresh-kode');
-      $wireui.notify({
-        title: event.title,
-        description: event.description,
-        icon: event.icon,
-        // onClose: () => Livewire.dispatch('pg:eventRefresh-kode'),
+  @push('customScript')
+    <script type="module">
+      Livewire.on('infoNotifikasi', async (event) => {
+        await Livewire.dispatch('pg:eventRefresh-kode');
+        $wireui.notify({
+          title: event.title,
+          description: event.description,
+          icon: event.icon,
+          // onClose: () => Livewire.dispatch('pg:eventRefresh-kode'),
+        });
       });
-    });
 
-    // window.pgBulkActions.count('detail');
-    // Livewire.on('hapus', async (event) => {
-    //   await Livewire.dispatch('executeHapus', {
-    //     rowId: event
-    //   });
-    //   Livewire.dispatch('pg:eventRefresh-kode');
-    // });
-    Livewire.on('create', (event) => {
-      $openModal('createModal');
-    });
-    Livewire.on('edit', (event) => {
-      // console.log(event);
-      $openModal('editModal');
-    });
-    Livewire.on('hapus', async (event) => {
-      // window.$wireui.confirmDialog({
-      //   title: 'Anda Yakin',
-      //   description: 'hapus data?',
-      //   icon: 'question',
-      //   accept: {
-      //     label: 'iya',
-      //     execute: () => Livewire.dispatch('executeHapus', {
-      //       rowId: event
-      //     })
-      //   },
-      //   reject: {
-      //     label: 'batal',
-      //     execute: () => window.$wireui.notify({
-      //       'icon': 'info',
-      //       'title': 'batal hapus data',
-      //     })
-      //   }
-      // })
-      await Livewire.dispatch('executeHapus', {
-        rowId: event
-      });
-      Livewire.dispatch('pg:eventRefresh-kode');
-    });
-    Livewire.on('pulihkan', async (event) => {
-      // window.$wireui.confirmDialog({
-      //   title: 'Anda Yakin',
-      //   description: 'pulihkan data ini?',
-      //   icon: 'info',
-      //   accept: {
-      //     label: 'iya',
-      //     execute: () => Livewire.dispatch('executePulihkan', {
-      //       rowId: event
-      //     })
-      //   },
-      //   reject: {
-      //     label: 'batal',
-      //     execute: () => window.$wireui.notify({
-      //       'icon': 'info',
-      //       'title': 'batal pulihkan data',
-      //     })
-      //   }
+      // window.pgBulkActions.count('detail');
+      // Livewire.on('hapus', async (event) => {
+      //   await Livewire.dispatch('executeHapus', {
+      //     rowId: event
+      //   });
+      //   Livewire.dispatch('pg:eventRefresh-kode');
       // });
-      await Livewire.dispatch('executePulihkan', {
-        rowId: event
+      Livewire.on('create', (event) => {
+        $openModal('createModal');
       });
-      Livewire.dispatch('pg:eventRefresh-kode');
-    });
-    Livewire.on('closeEditModal', () => {
-      $closeModal('editModal');
-    });
-    Livewire.on('permanenDelete', async (event) => {
-      window.$wireui.confirmDialog({
-        title: 'Permanent Delete',
-        description: 'anda yakin ? data akan dihapus dari database & tidak dapat dikembalikan',
-        icon: 'warning',
-        accept: {
-          label: 'iya',
-          execute: () => Livewire.dispatch('executePermanentHapus', {
-            rowId: event
-          })
-        },
-        reject: {
-          label: 'batal',
-        }
+      Livewire.on('edit', (event) => {
+        // console.log(event);
+        $openModal('editModal');
       });
-    });
-  </script>
-@endpush
+      Livewire.on('hapus', async (event) => {
+        // window.$wireui.confirmDialog({
+        //   title: 'Anda Yakin',
+        //   description: 'hapus data?',
+        //   icon: 'question',
+        //   accept: {
+        //     label: 'iya',
+        //     execute: () => Livewire.dispatch('executeHapus', {
+        //       rowId: event
+        //     })
+        //   },
+        //   reject: {
+        //     label: 'batal',
+        //     execute: () => window.$wireui.notify({
+        //       'icon': 'info',
+        //       'title': 'batal hapus data',
+        //     })
+        //   }
+        // })
+        await Livewire.dispatch('executeHapus', {
+          rowId: event
+        });
+        Livewire.dispatch('pg:eventRefresh-kode');
+      });
+      Livewire.on('pulihkan', async (event) => {
+        // window.$wireui.confirmDialog({
+        //   title: 'Anda Yakin',
+        //   description: 'pulihkan data ini?',
+        //   icon: 'info',
+        //   accept: {
+        //     label: 'iya',
+        //     execute: () => Livewire.dispatch('executePulihkan', {
+        //       rowId: event
+        //     })
+        //   },
+        //   reject: {
+        //     label: 'batal',
+        //     execute: () => window.$wireui.notify({
+        //       'icon': 'info',
+        //       'title': 'batal pulihkan data',
+        //     })
+        //   }
+        // });
+        await Livewire.dispatch('executePulihkan', {
+          rowId: event
+        });
+        Livewire.dispatch('pg:eventRefresh-kode');
+      });
+      Livewire.on('closeEditModal', () => {
+        $closeModal('editModal');
+      });
+      Livewire.on('permanenDelete', async (event) => {
+        window.$wireui.confirmDialog({
+          title: 'Permanent Delete',
+          description: 'anda yakin ? data akan dihapus dari database & tidak dapat dikembalikan',
+          icon: 'warning',
+          accept: {
+            label: 'iya',
+            execute: () => Livewire.dispatch('executePermanentHapus', {
+              rowId: event
+            })
+          },
+          reject: {
+            label: 'batal',
+          }
+        });
+      });
+    </script>
+  @endpush
+@endonce
