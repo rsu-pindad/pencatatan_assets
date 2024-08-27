@@ -10,7 +10,7 @@
     </li>
     <li>
       <a class="flex items-center gap-x-3.5 rounded-lg px-2.5 py-2 text-sm text-gray-800 hover:bg-gray-100 dark:text-neutral-200 dark:hover:bg-neutral-900 dark:hover:text-neutral-300"
-         href="{{route('aset')}}" wire:navigate>
+         href="{{route('aset')}}" >
          <x-heroicons::solid.inbox class="size-4 h-5 w-5 shrink-0" />
         Aset
       </a>
@@ -38,21 +38,21 @@
           <li>
             <a class="@if (request()->routeIs('kode')) underline decoration-blue-500 @endif flex items-center gap-x-3.5 rounded-lg px-2.5 py-2 text-sm text-gray-800 hover:bg-gray-100 focus:bg-gray-100 focus:outline-none dark:bg-neutral-800 dark:text-neutral-200"
                href="{{ route('kode') }}"
-               wire:navigate>
+               >
               Kode
             </a>
           </li>
           <li>
             <a class="@if (request()->routeIs('satuan')) underline decoration-blue-500 @endif flex items-center gap-x-3.5 rounded-lg px-2.5 py-2 text-sm text-gray-800 hover:bg-gray-100 focus:bg-gray-100 focus:outline-none dark:bg-neutral-800 dark:text-neutral-200"
                href="{{ route('satuan') }}"
-               wire:navigate>
+               >
               Satuan
             </a>
           </li>
           <li>
             <a class="@if (request()->routeIs('vendor')) underline decoration-blue-500 @endif flex items-center gap-x-3.5 rounded-lg px-2.5 py-2 text-sm text-gray-800 hover:bg-gray-100 focus:bg-gray-100 focus:outline-none dark:bg-neutral-800 dark:text-neutral-200"
                href="{{ route('vendor') }}"
-               wire:navigate>
+               >
               Vendor
             </a>
           </li>
@@ -100,21 +100,21 @@
                 <li>
                   <a class="@if (request()->routeIs('tipe-merek')) underline decoration-blue-500 @endif flex items-center gap-x-3.5 rounded-lg px-2.5 py-2 text-sm text-gray-800 hover:bg-gray-100 focus:bg-gray-100 focus:outline-none dark:bg-neutral-800 dark:text-neutral-200"
                      href="{{ route('tipe-merek') }}"
-                     wire:navigate>
+                     >
                     Master Tipe - Merek
                   </a>
                 </li>
                 <li>
                   <a class="@if (request()->routeIs('merek')) underline decoration-blue-500 @endif flex items-center gap-x-3.5 rounded-lg px-2.5 py-2 text-sm text-gray-800 hover:bg-gray-100 focus:bg-gray-100 focus:outline-none dark:bg-neutral-800 dark:text-neutral-200"
                      href="{{ route('merek') }}"
-                     wire:navigate>
+                     >
                     Merek
                   </a>
                 </li>
                 <li>
                   <a class="@if (request()->routeIs('tipe')) underline decoration-blue-500 @endif flex items-center gap-x-3.5 rounded-lg px-2.5 py-2 text-sm text-gray-800 hover:bg-gray-100 focus:bg-gray-100 focus:outline-none dark:bg-neutral-800 dark:text-neutral-200"
                      href="{{ route('tipe') }}"
-                     wire:navigate>
+                     >
                     Tipe
                   </a>
                 </li>
@@ -124,7 +124,7 @@
           <li>
             <a class="@if (request()->routeIs('unit')) underline decoration-blue-500 @endif flex items-center gap-x-3.5 rounded-lg px-2.5 py-2 text-sm text-gray-800 hover:bg-gray-100 focus:bg-gray-100 focus:outline-none dark:bg-neutral-800 dark:text-neutral-200"
                href="{{ route('unit') }}"
-               wire:navigate>
+               >
               Unit
             </a>
           </li>
