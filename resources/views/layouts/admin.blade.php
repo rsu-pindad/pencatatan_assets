@@ -92,8 +92,11 @@
     <x-wireui-dialog position="center" />
     <x-wireui-notifications position="top-end" />
     <script type="module">
-      document.addEventListener("livewire:navigated", () => {
+      document.addEventListener("livewire:navigated", (event) => {
         window.HSStaticMethods.autoInit();
+        event.preventDefault();
+        // event.defaultPrevented:true;
+        // console.log(event);
       });
       Wireui.hook('load', () => console.log('wireui ok'));
     </script>

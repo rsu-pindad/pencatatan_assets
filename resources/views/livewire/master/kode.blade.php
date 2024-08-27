@@ -5,6 +5,7 @@ layout('layouts.admin');
 title('Master Kode');
 ?>
 <div>
+
   <div class="grid gap-4 p-2 sm:grid-cols-1 sm:gap-6">
     <button id="collapse-widget"
             type="button"
