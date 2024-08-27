@@ -31,11 +31,11 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 //     enabledTransports: ['ws', 'wss'],
 // });
 import 'preline';
-import { Livewire, Alpine } from '../../vendor/livewire/livewire/dist/livewire.esm';
+// import { Livewire, Alpine } from '../../vendor/livewire/livewire/dist/livewire.esm';
 // import Alpine from 'alpinejs';
 import flatpickr from "flatpickr";
-window.Livewire = Livewire;
-window.Alpine = Alpine;
+// window.Livewire = Livewire;
+// window.Alpine = Alpine;
 window.flatpickr = flatpickr;
 // Alpine.start();
 // Livewire.start();
