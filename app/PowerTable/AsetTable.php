@@ -19,6 +19,8 @@ use PowerComponents\LivewirePowerGrid\Header;
 use PowerComponents\LivewirePowerGrid\PowerGrid;
 use PowerComponents\LivewirePowerGrid\PowerGridComponent;
 use PowerComponents\LivewirePowerGrid\PowerGridFields;
+use Illuminate\Support\Arr;
+use Livewire\Attributes\On;
 
 final class AsetTable extends PowerGridComponent
 {
@@ -199,13 +201,13 @@ final class AsetTable extends PowerGridComponent
     {
         try {
             if ($this->checkboxValues) {
-                $satuan = Satuan::whereIn('id', Arr::flatten($this->checkboxValues));
+                $satuan = Aset::whereIn('id', Arr::flatten($this->checkboxValues));
                 $satuan->delete();
                 $this->js('window.pgBulkActions.clearAll()');
             }
-            $this->dispatch('infoNotifikasi', title: 'Satuan', description: 'satuan berhasil dihapus!.', icon: 'info');
+            $this->dispatch('infoNotifikasi', title: 'Aset', description: 'aset berhasil dihapus!.', icon: 'info');
         } catch (\Throwable $th) {
-            $this->dispatch('infoNotifikasi', title: 'Satuan', description: $th->getMessage(), icon: 'error');
+            $this->dispatch('infoNotifikasi', title: 'Aset', description: $th->getMessage(), icon: 'error');
         }
     }
 
