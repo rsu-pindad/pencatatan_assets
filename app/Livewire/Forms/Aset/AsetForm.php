@@ -3,17 +3,15 @@
 namespace App\Livewire\Forms\Aset;
 
 use App\Models\Aset;
+use App\Models\Kode;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Attributes\Validate;
 use Livewire\Form;
-// use Illuminate\Support\Number;
 
-// use Livewire\WithFileUploads;
+use function Laravel\Prompts\select;
 
 class AsetForm extends Form
 {
-    // use WithFileUploads;
-
     #[Validate('required', message: 'mohon isi kode')]
     public $kode = '';
 
@@ -50,35 +48,20 @@ class AsetForm extends Form
         // dd($this->all());
         // $extension = $this->photo->getClientOriginalExtension();
         $photoName = 'default';
-        $storeImg = false;
-        // dd(bcadd($this->nilai,'0',2));
-        $this->nilai = str_replace('.','',$this->nilai);
-        // $nominal = Number::currency($nominal, 'RUPIAH', 'id');
-        if($this->photo != null){
+        // bcadd($this->nilai,'0',2);
+        // dd($this->nilai);
+        // $this->nilai = str_replace('.', '', $this->nilai);
+        $data = [];
+        if ($this->photo != null) {
             $photoName = $this->photo->hashName();
-            $storeImg  = Storage::disk('public')->putFileAs('asset_photo', $this->photo, $photoName);
-        }
-        if (!$storeImg) {
-            Aset::create([
-                'kode_id'             => $this->kode,
-                'prefix_aset'         => $this->kode . $this->nama,
-                'nama_aset'           => $this->nama,
-                'tanggal_perolehan'   => $this->tglPerolehan,
-                'nilai_perolehan'     => $this->nilai,
-                'satuan_id'           => $this->satuan,
-                'jumlah'              => $this->jumlah,
-                'vendor_id'           => $this->vendor,
-                'pivot_tipe_merek_id' => $this->tipeMerek,
-                'unit_id'             => $this->unit,
-                'image_aset'          => $photoName,
-            ]);
+            Storage::disk('public')->putFileAs('asset_photo', $this->photo, $photoName);
         }
         Aset::create([
             'kode_id'             => $this->kode,
-            'prefix_aset'         => $this->kode . $this->nama,
+            'prefix_aset'         => $this->kode . '-' . $this->nama,
             'nama_aset'           => $this->nama,
             'tanggal_perolehan'   => $this->tglPerolehan,
-            'nilai_perolehan'     => floatval($this->nilai),
+            'nilai_perolehan'     => $this->nilai,
             'satuan_id'           => $this->satuan,
             'jumlah'              => $this->jumlah,
             'vendor_id'           => $this->vendor,
