@@ -6,10 +6,11 @@ use Livewire\Volt\Volt;
 
 // Route::view('/', 'welcome');
 Volt::route('/', 'beranda')->middleware(['auth'])->name('beranda');
+Volt::route('/dashboard', 'beranda')->middleware(['auth']);
 
-Route::view('dashboard', 'dashboard')
-    ->middleware(['auth', 'verified'])
-    ->name('dashboard');
+// Route::view('dashboard', 'dashboard')
+//     ->middleware(['auth', 'verified'])
+//     ->name('dashboard');
 
 Volt::route('profile', 'profile')
     ->middleware(['auth'])
@@ -37,12 +38,12 @@ Route::group(['middleware' => ['role:kabag']], function () {
 
     Route::group(['prefix' => 'master-aset'], function () {
         Volt::route('aset', 'master.aset')->name('aset');
-        Route::get('data-kode', [DataMasterController::class,                 'getKode'])->name('data-kode');
-        Route::get('data-vendor', [DataMasterController::class,               'getVendor'])->name('data-vendor');
-        Route::get('data-satuan', [DataMasterController::class,               'getSatuan'])->name('data-satuan');
+        Route::get('data-kode', [DataMasterController::class,   'getKode'])->name('data-kode');
+        Route::get('data-vendor', [DataMasterController::class, 'getVendor'])->name('data-vendor');
+        Route::get('data-satuan', [DataMasterController::class, 'getSatuan'])->name('data-satuan');
         // Route::get('data-tipe-merek', [DataMasterController::class,           'getTipeMerek'])->name('data-tipe-merek');
         // Route::get('data-tipe-merek-name/{id}', [DataMasterController::class, 'getTipeMerekName'])->name('data-tipe-merek-name');
-        Route::get('data-unit', [DataMasterController::class,                 'getUnit'])->name('data-unit');
+        Route::get('data-unit', [DataMasterController::class, 'getUnit'])->name('data-unit');
     });
 })->middleware(['auth']);
 
