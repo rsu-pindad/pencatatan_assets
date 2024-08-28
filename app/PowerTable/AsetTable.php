@@ -179,21 +179,9 @@ final class AsetTable extends PowerGridComponent
         ];
     }
 
-    #[\Livewire\Attributes\On('edit')]
-    public function edit($rowId): void
-    {
-        $this->js('alert(' . $rowId . ')');
-    }
-
     public function actions(Aset $row): array
     {
         return [
-            Button::add('edit')
-                ->slot('<x-heroicons::solid.pencil class="w-4 h-4" />')
-                ->id()
-                ->tooltip('edit')
-                ->class('pg-btn-white dark:ring-pg-primary-600 dark:border-pg-primary-600 dark:hover:bg-pg-primary-700 dark:ring-offset-pg-primary-800 dark:text-pg-primary-300 dark:bg-pg-primary-700')
-                ->dispatch('edit', ['rowId' => $row->id]),
             Button::add('hapus')
                 ->slot('<x-heroicons::solid.trash class="w-4 h-4" />')
                 ->id()
@@ -233,9 +221,6 @@ final class AsetTable extends PowerGridComponent
     public function actionRules($row): array
     {
         return [
-            Rule::button('edit')
-                ->when(fn(Aset $aset) => $aset->trashed() == true)
-                ->hide(),
             Rule::button('hapus')
                 ->when(fn(Aset $aset) => $aset->trashed() == true)
                 ->hide(),

@@ -1,7 +1,7 @@
 <?php
 
 use App\Livewire\Forms\Satuan\SatuanForm;
-use function Livewire\Volt\{form, action, on, usesFileUploads};
+use function Livewire\Volt\{form, action, on};
 
 form(SatuanForm::class);
 

@@ -23,6 +23,7 @@ title('Master Aset');
        aria-labelledby="collapse-widget">
     <div class="ld:grid-cols-5 grid gap-4 p-2 sm:grid-cols-2 sm:gap-6 md:grid-cols-3">
       <!-- Card -->
+      <livewire:master-aset.aset-widget wire:key="{{ uniqid() }}" />
       <!-- End Card -->
     </div>
   </div>
@@ -90,6 +91,8 @@ title('Master Aset');
   @push('customModal')
     <livewire:master-aset.aset-form lazy
                                     wire:key="{{ uniqid() }}" />
+    <livewire:master-aset.aset-update-form lazy
+                                           wire:key="{{ uniqid() }}" />
   @endpush
 
   @push('customScript')
@@ -104,6 +107,12 @@ title('Master Aset');
       });
       Livewire.on('create', (event) => {
         $openModal('createModal');
+      });
+      Livewire.on('hapus', async (event) => {
+        await Livewire.dispatch('executeHapus', {
+          rowId: event
+        });
+        Livewire.dispatch('pg:eventRefresh-aset');
       });
     </script>
   @endpush
