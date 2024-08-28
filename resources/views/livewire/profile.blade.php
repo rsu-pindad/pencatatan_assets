@@ -22,3 +22,16 @@ title('Halaman Profil');
     </div>
   </div>
 </div>
+
+@once
+  @push('breadcrumb')
+    <x-preline.breadcrumb>
+      <x-slot:content>
+        <li class="flex items-center text-sm text-gray-800 dark:text-neutral-400"
+            aria-current="page">
+          Profil
+        </li>
+      </x-slot:content>
+    </x-preline.breadcrumb>
+  @endpush
+@endonce
