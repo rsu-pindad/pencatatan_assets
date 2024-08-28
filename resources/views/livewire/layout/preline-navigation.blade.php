@@ -42,9 +42,7 @@ $profile = function () {
                 aria-haspopup="menu"
                 aria-expanded="false"
                 aria-label="Dropdown">
-          <img class="size-[38px] shrink-0 rounded-full"
-               src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=320&h=320&q=80"
-               alt="Avatar">
+          {!! Avatar::create(Auth::user()->npp)->toSvg() !!}
         </button>
 
         <div class="hs-dropdown-menu duration min-w-60 mt-2 hidden rounded-lg bg-white opacity-0 shadow-md transition-[opacity,margin] before:absolute before:-top-4 before:start-0 before:h-4 before:w-full after:absolute after:-bottom-4 after:start-0 after:h-4 after:w-full hs-dropdown-open:opacity-100 dark:divide-neutral-700 dark:border dark:border-neutral-700 dark:bg-neutral-800"
@@ -53,14 +51,14 @@ $profile = function () {
              aria-labelledby="hs-dropdown-account">
           <div class="rounded-t-lg bg-gray-100 px-5 py-3 dark:bg-neutral-700">
             <p class="text-sm text-gray-500 dark:text-neutral-500">Masuk Sebagai</p>
-            <p class="text-sm font-medium text-gray-800 dark:text-neutral-200">{{Auth::user()->npp}}</p>
+            <p class="text-sm font-medium text-gray-800 dark:text-neutral-200">{{ Auth::user()->npp }}</p>
           </div>
           <div class="space-y-0.5 p-1.5">
             <a wire:click="profile"
                class="flex items-center gap-x-3.5 rounded-lg px-3 py-2 text-sm text-gray-800 hover:bg-gray-100 focus:bg-gray-100 focus:outline-none dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700 dark:focus:text-neutral-300"
                href="#">
               <x-heroicons::solid.user class="size-4 h-5 w-5 shrink-0" />
-              Profile
+              Profil
             </a>
             <a wire:click="logout"
                class="flex items-center gap-x-3.5 rounded-lg px-3 py-2 text-sm text-gray-800 hover:bg-gray-100 focus:bg-gray-100 focus:outline-none dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700 dark:focus:text-neutral-300"
