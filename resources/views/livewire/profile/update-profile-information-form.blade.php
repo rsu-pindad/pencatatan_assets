@@ -10,7 +10,7 @@ use Illuminate\Validation\Rule;
 use function Livewire\Volt\state;
 
 state([
-    'name' => fn () => auth()->user()->name,
+    'npp' => fn () => auth()->user()->npp,
     'email' => fn () => auth()->user()->email
 ]);
 
