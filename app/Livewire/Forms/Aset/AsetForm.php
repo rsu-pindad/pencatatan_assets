@@ -22,6 +22,7 @@ class AsetForm extends Form
     public $tglPerolehan = '';
 
     #[Validate('required', message: 'mohon isi nilai')]
+    #[Validate('min:1500000', message: 'minimal 1.500.000')]
     public $nilai = '';
 
     #[Validate('required', message: 'mohon isi jumlah')]
