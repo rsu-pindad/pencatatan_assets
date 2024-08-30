@@ -3,12 +3,9 @@
 namespace App\Livewire\Forms\Aset;
 
 use App\Models\Aset;
-use App\Models\Kode;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Attributes\Validate;
 use Livewire\Form;
-
-use function Laravel\Prompts\select;
 
 class AsetForm extends Form
 {
@@ -22,7 +19,8 @@ class AsetForm extends Form
     public $tglPerolehan = '';
 
     #[Validate('required', message: 'mohon isi nilai')]
-    #[Validate('min:1500000', message: 'minimal 1.500.000')]
+    #[Validate('numeric')]
+    #[Validate('min:1500000', message: 'Nilai >= 1.500.000')]
     public $nilai = '';
 
     #[Validate('required', message: 'mohon isi jumlah')]
@@ -34,7 +32,6 @@ class AsetForm extends Form
     #[Validate('required', message: 'mohon isi vendor')]
     public $vendor = '';
 
-    #[Validate('required', message: 'mohon isi tipe/merek')]
     public $tipeMerek = '';
 
     #[Validate('required', message: 'mohon isi unit')]

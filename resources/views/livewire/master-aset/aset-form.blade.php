@@ -50,7 +50,7 @@ $insert = action(function () {
                                option-value="id" />
             </div>
             <div class="inline-block">
-              <x-wireui-input wire:model.live="form.nama"
+              <x-wireui-input wire:model.blur="form.nama"
                               with-validation-colors=true
                               corner="min:4"
                               label="Nama Aset"
@@ -67,15 +67,15 @@ $insert = action(function () {
                                         without-time-seconds />
             </div>
             <div class="inline-block">
-              <x-wireui-currency wire:model.live="form.nilai"
+              <x-wireui-currency wire:model.blur="form.nilai"
                                  with-validation-colors=true
-                                 corner="min:Rp.1.500.000"
+                                 corner=">=1.500.000"
                                  label="Nilai Perolehan Aset"
                                  placeholder="masukan nilai"
                                  prefix="Rp."
                                  decimal=","
                                  thousands="."
-                                 min="0" />
+                                 min="1499999" />
             </div>
             <div class="inline-block">
               <x-wireui-number wire:model.live="form.jumlah"
@@ -119,7 +119,7 @@ $insert = action(function () {
           <div class="mt-6 grid grid-cols-2 gap-6">
             <div class="inline-block">
               <label for="hs-select-label"
-                     class="mb-2 block text-sm font-medium dark:text-white">Pilih Tipe/Merek
+                     class="mb-2 block text-sm font-medium dark:text-white">Pilih Tipe/Merek (opsional)
               </label>
               <select id="hs-select-label"
                       wire:model.live="form.tipeMerek"
