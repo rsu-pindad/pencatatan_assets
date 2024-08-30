@@ -61,31 +61,8 @@
                     aria-controls="master-data-accordion-sub-1-child">
               Tipe - Merek
 
-              <svg class="size-4 ms-auto hidden hs-accordion-active:block"
-                   xmlns="http://www.w3.org/2000/svg"
-                   width="24"
-                   height="24"
-                   viewBox="0 0 24 24"
-                   fill="none"
-                   stroke="currentColor"
-                   stroke-width="2"
-                   stroke-linecap="round"
-                   stroke-linejoin="round">
-                <path d="m18 15-6-6-6 6" />
-              </svg>
-
-              <svg class="size-4 ms-auto block hs-accordion-active:hidden"
-                   xmlns="http://www.w3.org/2000/svg"
-                   width="24"
-                   height="24"
-                   viewBox="0 0 24 24"
-                   fill="none"
-                   stroke="currentColor"
-                   stroke-width="2"
-                   stroke-linecap="round"
-                   stroke-linejoin="round">
-                <path d="m6 9 6 6 6-6" />
-              </svg>
+              <x-heroicons::solid.chevron-up class="size-4 ms-auto hidden h-4 w-4 hs-accordion-active:block" />
+              <x-heroicons::solid.chevron-down class="size-4 ms-auto block h-4 w-4 hs-accordion-active:hidden" />
             </button>
 
             <div id="master-data-accordion-sub-1-child"
@@ -95,13 +72,13 @@
                  style="@if (request()->routeIs(['tipe-merek', 'tipe', 'merek'])) display:block; @endif">
               <ul class="space-y-1 pt-1">
                 <li>
-                  <a class="@if (request()->routeIs('tipe-merek')) underline decoration-blue-500 @endif flex items-center gap-x-3.5 rounded-lg px-2.5 py-2 text-sm text-gray-800 hover:bg-gray-100 focus:bg-gray-100 focus:outline-none dark:bg-neutral-800 dark:text-neutral-200"
+                  <a class="@if (request()->routeIs('tipe-merek')) underline decoration-blue-500 @endif ml-4 flex items-center gap-x-3.5 rounded-lg px-2.5 py-2 text-sm text-gray-800 hover:bg-gray-100 focus:bg-gray-100 focus:outline-none dark:bg-neutral-800 dark:text-neutral-200"
                      href="{{ route('tipe-merek') }}">
                     Master Tipe - Merek
                   </a>
                 </li>
                 <li>
-                  <a class="@if (request()->routeIs('merek')) underline decoration-blue-500 @endif flex items-center gap-x-3.5 rounded-lg px-2.5 py-2 text-sm text-gray-800 hover:bg-gray-100 focus:bg-gray-100 focus:outline-none dark:bg-neutral-800 dark:text-neutral-200"
+                  <a class="@if (request()->routeIs('merek')) underline decoration-blue-500 @endif ml-4 flex items-center gap-x-3.5 rounded-lg px-2.5 py-2 text-sm text-gray-800 hover:bg-gray-100 focus:bg-gray-100 focus:outline-none dark:bg-neutral-800 dark:text-neutral-200"
                      href="{{ route('merek') }}">
                     Merek
                   </a>
