@@ -12,14 +12,14 @@ return new class extends Migration {
     {
         Schema::table('aset', function (Blueprint $table) {
             $table->dropForeign('aset_pivot_tipe_merek_id_foreign');
-            $table->unsignedBigInteger('pivot_tipe_merek_id')->nullable()->change();
+            $table->unsignedBigInteger('pivot_tipe_merek_id')->nullable()->default(null)->change();
             $table
                 ->foreign('pivot_tipe_merek_id')
                 ->references('id')
                 ->on('pivot_tipe_merek')
                 ->constrained()
                 ->onUpdate('cascade')
-                ->onDelete('cascade');
+                ->onDelete('set null');
         });
     }
 

@@ -32,7 +32,7 @@ class AsetForm extends Form
     #[Validate('required', message: 'mohon isi vendor')]
     public $vendor = '';
 
-    public $tipeMerek = '';
+    public $tipeMerek = null;
 
     #[Validate('required', message: 'mohon isi unit')]
     public $unit = '';
@@ -63,7 +63,7 @@ class AsetForm extends Form
             'satuan_id'           => $this->satuan,
             'jumlah'              => $this->jumlah,
             'vendor_id'           => $this->vendor,
-            'pivot_tipe_merek_id' => $this->tipeMerek,
+            'pivot_tipe_merek_id' => $this->tipeMerek ?? null,
             'unit_id'             => $this->unit,
             'image_aset'          => $photoName,
         ]);

@@ -131,9 +131,17 @@ final class AsetTable extends PowerGridComponent
                    })
                    //    ->add('pivot_tipe_merek_id')
                    ->add('pivot_tipe_merek_id_format_tipe', function ($aset) {
+                       if ($aset->parentPivotTipeMerek === null) {
+                           return e('-');
+                       }
+
                        return e($aset->parentPivotTipeMerek->parentTipe->nama_tipe);
                    })
                    ->add('pivot_tipe_merek_id_format_merek', function ($aset) {
+                       if ($aset->parentPivotTipeMerek === null) {
+                           return e('-');
+                       }
+
                        return e($aset->parentPivotTipeMerek->parentMerek->nama_merek);
                    })
                    ->add('unit_id_formatted', function ($aset) {
