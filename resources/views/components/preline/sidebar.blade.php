@@ -84,7 +84,7 @@
                   </a>
                 </li>
                 <li>
-                  <a class="@if (request()->routeIs('tipe')) underline decoration-blue-500 @endif flex items-center gap-x-3.5 rounded-lg px-2.5 py-2 text-sm text-gray-800 hover:bg-gray-100 focus:bg-gray-100 focus:outline-none dark:bg-neutral-800 dark:text-neutral-200"
+                  <a class="@if (request()->routeIs('tipe')) underline decoration-blue-500 @endif ml-4 flex items-center gap-x-3.5 rounded-lg px-2.5 py-2 text-sm text-gray-800 hover:bg-gray-100 focus:bg-gray-100 focus:outline-none dark:bg-neutral-800 dark:text-neutral-200"
                      href="{{ route('tipe') }}">
                     Tipe
                   </a>
