@@ -8,7 +8,7 @@ use Livewire\Form;
 
 class MerekUpdateForm extends Form
 {
-    public $rowId     = '';
+    public $rowId      = '';
     public $nama_merek = '';
 
     public function rules()
@@ -25,17 +25,23 @@ class MerekUpdateForm extends Form
     public function mount($row)
     {
         $merek            = Merek::find($row);
-        $this->rowId     = $merek->id;
+        $this->rowId      = $merek->id;
         $this->nama_merek = $merek->nama_merek;
     }
 
     public function update()
     {
         $this->validate();
-        $merek            = Merek::find($this->rowId);
-        $merek->nama_merek = $this->nama_merek;
-        $merek->save();
-        $this->reset();
+        try {
+            $merek             = Merek::find($this->rowId);
+            $merek->nama_merek = $this->nama_merek;
+            $merek->save();
+            $this->reset();
+
+            return true;
+        } catch (\Throwable $th) {
+            return $th->getMessage();
+        }
     }
 
     public function destroy($rowId)

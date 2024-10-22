@@ -94,11 +94,12 @@ title('Master Vendor');
     <livewire:master-vendor.vendor-update-form lazy
                                                wire:key="{{ uniqid() }}" />
     <livewire:master-vendor.vendor-import lazy
-                                               wire:key="{{ uniqid() }}" />
+                                          wire:key="{{ uniqid() }}" />
   @endpush
 
   @push('customScript')
-    <script type="module" data-navigate-track>
+    <script type="module"
+            data-navigate-track>
       Livewire.on('infoNotifikasi', async (event) => {
         await Livewire.dispatch('pg:eventRefresh-vendor_power_table');
         $wireui.notify({

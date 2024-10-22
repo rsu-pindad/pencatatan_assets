@@ -6,13 +6,11 @@ use function Livewire\Volt\{form, action, on};
 form(UnitForm::class);
 
 $insert = action(function () {
-    try {
-        $store = $this->form->store();
-        $this->form->reset();
+    $store = $this->form->store();
+    if ($store) {
         return $this->dispatch('infoNotifikasi', title: 'Unit', description: 'unit berhasil disimpan!.', icon: 'success');
-    } catch (\Throwable $th) {
-        return $this->dispatch('infoNotifikasi', title: 'Unit', description: $th->getMessage(), icon: 'error');
     }
+    return $this->dispatch('infoNotifikasi', title: 'Unit', description: $store, icon: 'error');
 });
 
 ?>
@@ -35,7 +33,7 @@ $insert = action(function () {
       <div class="my-6">
         <form wire:submit="insert">
           <div class="mt-3">
-            <x-wireui-input wire:model="form.nama"
+            <x-wireui-input wire:model="form.nama_unit"
                             with-validation-colors=true
                             corner="min:2"
                             label="Nama Unit"

@@ -22,6 +22,7 @@ class KodeUpdateForm extends Form
             ],
             'keterangan_kode' => [
                 'string',
+                'nullable'
             ],
         ];
     }
@@ -37,11 +38,17 @@ class KodeUpdateForm extends Form
     public function update()
     {
         $this->validate();
-        $kode                  = Kode::find($this->rowId);
-        $kode->prefix_kode     = $this->prefix_kode;
-        $kode->keterangan_kode = $this->keterangan_kode;
-        $kode->save();
-        $this->reset();
+        try {
+            $kode                  = Kode::find($this->rowId);
+            $kode->prefix_kode     = $this->prefix_kode;
+            $kode->keterangan_kode = $this->keterangan_kode;
+            $kode->save();
+            $this->reset();
+
+            return true;
+        } catch (\Throwable $th) {
+            return $th->getMessage();
+        }
     }
 
     public function destroy($rowId)
