@@ -21,7 +21,11 @@ class SheetNameImport implements WithMultipleSheets
     public function conditionalSheets(): array
     {
         return [
-            'Unit' => new UnitImport($this->awal, $this->akhir),
+            'Unit'      => new UnitImport($this->awal, $this->akhir),
+            'Tipe'      => new TipeImport($this->awal, $this->akhir),
+            'Merek'     => new MerekImport($this->awal, $this->akhir),
+            'TipeMerek' => new TipeMerekImport($this->awal, $this->akhir),
+            'Vendor'    => new VendorImport($this->awal, $this->akhir),
         ];
     }
 }
