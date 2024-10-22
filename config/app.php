@@ -221,5 +221,6 @@ return [
     'import_template_tipemerek' => env('TEMPLATE_TIPEMEREK',''),
     'import_template_vendor' => env('TEMPLATE_VENDOR',''),
     'import_template_satuan' => env('TEMPLATE_SATUAN',''),
+    'import_template_kode' => env('TEMPLATE_KODE',''),
 
 ];

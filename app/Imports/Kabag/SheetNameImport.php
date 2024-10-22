@@ -27,6 +27,7 @@ class SheetNameImport implements WithMultipleSheets
             'TipeMerek' => new TipeMerekImport($this->awal, $this->akhir),
             'Vendor'    => new VendorImport($this->awal, $this->akhir),
             'Satuan'    => new SatuanImport($this->awal, $this->akhir),
+            'Kode'      => new KodeImport($this->awal, $this->akhir),
         ];
     }
 }
