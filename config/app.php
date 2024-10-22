@@ -220,5 +220,6 @@ return [
     'import_template_merek' => env('TEMPLATE_MEREK',''),
     'import_template_tipemerek' => env('TEMPLATE_TIPEMEREK',''),
     'import_template_vendor' => env('TEMPLATE_VENDOR',''),
+    'import_template_satuan' => env('TEMPLATE_SATUAN',''),
 
 ];
