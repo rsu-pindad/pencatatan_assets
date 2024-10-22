@@ -93,7 +93,6 @@ final class TipeTable extends PowerGridComponent
                 ->showToggleColumns()
                 ->showSoftDeletes(showMessage: false)
                 ->includeViewOnTop('components.power.tipe.header-top'),
-            // ->withoutLoading(),
             Footer::make()
                 ->showPerPage(perPage: 50, perPageValues: [50, 100, 500])
                 ->showRecordCount(),

@@ -10,7 +10,8 @@ class SatuanForm extends Form
 {
     #[Validate('required', message: 'mohon isi prefix')]
     #[Validate('min:2', message: 'minimal 2 huruf')]
-    public $nama = '';
+    #[Validate('unique:satuan', message: 'nama satuan sudah ada')]
+    public $nama_satuan = '';
 
     public $konversi   = null;
     public $keterangan = '';
@@ -18,10 +19,17 @@ class SatuanForm extends Form
     public function store()
     {
         $this->validate();
-        Satuan::create([
-            'nama_satuan'       => $this->nama,
-            'konversi_satuan'   => $this->konversi,
-            'keterangan_satuan' => $this->keterangan,
-        ]);
+        try {
+            Satuan::create([
+                'nama_satuan'       => $this->nama_satuan,
+                'konversi_satuan'   => $this->konversi,
+                'keterangan_satuan' => $this->keterangan,
+            ]);
+            $this->reset();
+
+            return true;
+        } catch (\Throwable $th) {
+            $th->getMessage();
+        }
     }
 }

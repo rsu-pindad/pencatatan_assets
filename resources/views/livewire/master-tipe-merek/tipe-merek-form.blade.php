@@ -6,13 +6,11 @@ use function Livewire\Volt\{form, action, on};
 form(TipeMerekForm::class);
 
 $insert = action(function () {
-    try {
-        $store = $this->form->storeMerek();
-        // $this->storeMerek->reset();
-        return $this->dispatch('infoNotifikasi', title: 'TipeMerek', description: 'TipeMerek berhasil disimpan!.', icon: 'success');
-    } catch (\Throwable $th) {
-        return $this->dispatch('infoNotifikasi', title: 'TipeMerek', description: $th->getMessage(), icon: 'error');
+    $store = $this->form->storeMerek();
+    if ($store) {
+        return $this->dispatch('infoNotifikasi', title: 'Tipe-Merek', description: 'tipe-merek berhasil disimpan!.', icon: 'success');
     }
+    return $this->dispatch('infoNotifikasi', title: 'Tipe-Merek', description: $store, icon: 'error');
 });
 
 ?>
@@ -36,9 +34,8 @@ $insert = action(function () {
       <div class="my-6">
         <form wire:submit="insert">
           <div class="mt-3">
-            <x-wireui-select 
-            wire:model="form.tipe"
-                label="Cari tipe"
+            <x-wireui-select wire:model="form.tipe"
+                             label="Cari tipe"
                              placeholder="Select tipe"
                              :async-data="[
                                  'api' => route('data-tipe'),
@@ -48,9 +45,8 @@ $insert = action(function () {
                              option-value="id" />
           </div>
           <div class="mt-3">
-            <x-wireui-select 
-            wire:model="form.merek"
-                label="Cari Merek"
+            <x-wireui-select wire:model="form.merek"
+                             label="Cari Merek"
                              placeholder="Select merek"
                              multiselect
                              :async-data="[

@@ -99,13 +99,14 @@ title('Master Kode');
     <livewire:master-kode.kode-update-form lazy
                                            wire:key="{{ uniqid() }}" />
     <livewire:master-kode.kode-import lazy
-                                           wire:key="{{ uniqid() }}" />
+                                      wire:key="{{ uniqid() }}" />
   @endpush
 
   @push('customScript')
-    <script type="module" data-navigate-track>
+    <script type="module"
+            data-navigate-track>
       Livewire.on('infoNotifikasi', async (event) => {
-        await Livewire.dispatch('pg:eventRefresh-kode');
+        await Livewire.dispatch('pg:eventRefresh-kode_power_table');
         $wireui.notify({
           title: event.title,
           description: event.description,
