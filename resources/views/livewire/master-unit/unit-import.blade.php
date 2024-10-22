@@ -2,7 +2,7 @@
 
 use App\Imports\Kabag\SheetNameImport;
 use Maatwebsite\Excel\Facades\Excel;
-use function Livewire\Volt\{state, usesFileUploads};
+use function Livewire\Volt\{state, usesFileUploads, on};
 
 usesFileUploads();
 
@@ -25,6 +25,17 @@ $import = function () {
         return $this->dispatch('infoNotifikasi', title: 'Unit', description: $th->getMessage(), icon: 'error');
     }
 };
+
+on([
+    'downloadImport' => function () {
+        try {
+            $path = config('app.import_template_unit');
+            return Storage::disk('public')->download($path);
+        } catch (\Throwable $th) {
+            return $this->dispatch('infoNotifikasi', title: 'Unit', description: $th->getMessage(), icon: 'error');
+        }
+    },
+]);
 
 ?>
 
