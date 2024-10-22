@@ -4,11 +4,14 @@ namespace App\PowerTable;
 
 use App\Models\Unit;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Str;
 use Livewire\Attributes\Locked;
 use Livewire\Attributes\On;
 use PowerComponents\LivewirePowerGrid\Facades\Filter;
+use PowerComponents\LivewirePowerGrid\Facades\Rule;
 use PowerComponents\LivewirePowerGrid\Traits\WithExport;
 use PowerComponents\LivewirePowerGrid\Button;
 use PowerComponents\LivewirePowerGrid\Column;
@@ -18,9 +21,6 @@ use PowerComponents\LivewirePowerGrid\Header;
 use PowerComponents\LivewirePowerGrid\PowerGrid;
 use PowerComponents\LivewirePowerGrid\PowerGridComponent;
 use PowerComponents\LivewirePowerGrid\PowerGridFields;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Str;
-use PowerComponents\LivewirePowerGrid\Facades\Rule;
 
 final class UnitTable extends PowerGridComponent
 {
@@ -29,10 +29,9 @@ final class UnitTable extends PowerGridComponent
     #[Locked]
     public string $tableName = 'unit_power_table';
 
-    public bool $showFilters = true;
-    public bool $deferLoading = true;
-    public string $strRandom  = '';
-
+    public bool $showFilters        = true;
+    public bool $deferLoading       = true;
+    public string $strRandom        = '';
     public string $loadingComponent = 'components.power.spinner-loading';
 
     public function boot(): void
@@ -93,7 +92,6 @@ final class UnitTable extends PowerGridComponent
                 ->showToggleColumns()
                 ->showSoftDeletes(showMessage: false)
                 ->includeViewOnTop('components.power.unit.header-top'),
-            // ->withoutLoading(),
             Footer::make()
                 ->showPerPage(perPage: 50, perPageValues: [50, 100, 500])
                 ->showRecordCount(),
@@ -123,6 +121,8 @@ final class UnitTable extends PowerGridComponent
             Column::make('Id', 'id')
                 ->hidden(isHidden: true, isForceHidden: true)
                 ->visibleInExport(true),
+            Column::make('No', 'id')
+                ->index(),
             Column::make('Nama unit', 'nama_unit')
                 ->fixedOnResponsive()
                 ->sortable()
@@ -137,8 +137,8 @@ final class UnitTable extends PowerGridComponent
     {
         return [
             Filter::inputText('nama_unit')
-            ->operators(['contains', 'is', 'is_not'])
-            ->placeholder('cari nama unit'),
+                ->operators(['contains', 'is', 'is_not'])
+                ->placeholder('cari nama unit'),
         ];
     }
 
@@ -176,7 +176,7 @@ final class UnitTable extends PowerGridComponent
     public function bulkDelete(): void
     {
         try {
-            if($this->checkboxValues){
+            if ($this->checkboxValues) {
                 $unit = Unit::whereIn('id', Arr::flatten($this->checkboxValues));
                 $unit->delete();
                 $this->js('window.pgBulkActions.clearAll()');
