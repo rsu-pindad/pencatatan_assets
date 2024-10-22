@@ -4,11 +4,14 @@ namespace App\PowerTable;
 
 use App\Models\Merek;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Str;
 use Livewire\Attributes\Locked;
 use Livewire\Attributes\On;
 use PowerComponents\LivewirePowerGrid\Facades\Filter;
+use PowerComponents\LivewirePowerGrid\Facades\Rule;
 use PowerComponents\LivewirePowerGrid\Traits\WithExport;
 use PowerComponents\LivewirePowerGrid\Button;
 use PowerComponents\LivewirePowerGrid\Column;
@@ -18,39 +21,41 @@ use PowerComponents\LivewirePowerGrid\Header;
 use PowerComponents\LivewirePowerGrid\PowerGrid;
 use PowerComponents\LivewirePowerGrid\PowerGridComponent;
 use PowerComponents\LivewirePowerGrid\PowerGridFields;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Str;
-use PowerComponents\LivewirePowerGrid\Facades\Rule;
 
 final class MerekTable extends PowerGridComponent
 {
     use WithExport;
 
     #[Locked]
-    public string $tableName = 'merek';
+    public string $tableName = 'merek_power_table';
 
-    public bool $deferLoading = true;
-    public string $strRandom  = '';
+    public bool $showFilters        = true;
+    public bool $deferLoading       = true;
+    public string $strRandom        = '';
+    public string $loadingComponent = 'components.power.spinner-loading';
+
+    public function boot(): void
+    {
+        config(['livewire-powergrid.filter' => 'outside']);
+    }
 
     public function hydrate(): void
     {
         sleep(1);
     }
 
-    protected function queryString(): array
-    {
-        return [
-            'search' => ['except' => ''],
-            // 'page' => ['except' => 1],
-            ...$this->powerGridQueryString(),
-        ];
-    }
+    // protected function queryString(): array
+    // {
+    //     return [
+    //         'search' => ['except' => ''],
+    //         // 'page' => ['except' => 1],
+    //         ...$this->powerGridQueryString(),
+    //     ];
+    // }
 
     public function header(): array
     {
         return [
-            Button::add('segarkan')
-                ->slot('<x-wireui-mini-button sm rounded secondary icon="arrow-path" wire:click="$refresh" spinner />'),
             Button::add('bulk-delete')
                 ->slot('<x-heroicons::outline.trash class="w-5 h-5" />(<span x-text="window.pgBulkActions.count(\'' . $this->tableName . '\')"></span>)')
                 ->class('pg-btn-white dark:ring-pg-primary-600 dark:border-pg-primary-600 dark:hover:bg-pg-primary-700 dark:ring-offset-pg-primary-800 dark:text-pg-primary-300 dark:bg-pg-primary-700')
@@ -83,11 +88,12 @@ final class MerekTable extends PowerGridComponent
             // ->onQueue('pg-exportKode'),
             // ->onConnection('redis'),
             Header::make()
+                ->withoutLoading()
                 ->showToggleColumns()
-                ->showSoftDeletes(showMessage: false),
-            // ->withoutLoading(),
+                ->showSoftDeletes(showMessage: false)
+                ->includeViewOnTop('components.power.merek.header-top'),
             Footer::make()
-                ->showPerPage(perPage: 5, perPageValues: [5, 25, 50, 100, 500])
+                ->showPerPage(perPage: 50, perPageValues: [50, 100, 500])
                 ->showRecordCount(),
         ];
     }
@@ -112,18 +118,25 @@ final class MerekTable extends PowerGridComponent
     public function columns(): array
     {
         return [
-            Column::make('Id', 'id'),
+            Column::make('Id', 'id')
+                ->hidden(isHidden: true, isForceHidden: true)
+                ->visibleInExport(true),
+            Column::make('No', 'id')
+                ->index(),
             Column::make('Nama merek', 'nama_merek')
                 ->sortable()
                 ->searchable(),
-            Column::action('Action')
+            Column::action('Aksi')
+                ->visibleInExport(false),
         ];
     }
 
     public function filters(): array
     {
         return [
-            Filter::inputText('nama_merek')->placeholder('cari nama'),
+            Filter::inputText('nama_merek')
+                ->operators(['contains', 'is', 'is_not'])
+                ->placeholder('cari nama merek'),
         ];
     }
 
