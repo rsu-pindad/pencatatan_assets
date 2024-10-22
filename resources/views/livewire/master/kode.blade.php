@@ -98,6 +98,8 @@ title('Master Kode');
                                     wire:key="{{ uniqid() }}" />
     <livewire:master-kode.kode-update-form lazy
                                            wire:key="{{ uniqid() }}" />
+    <livewire:master-kode.kode-import lazy
+                                           wire:key="{{ uniqid() }}" />
   @endpush
 
   @push('customScript')
