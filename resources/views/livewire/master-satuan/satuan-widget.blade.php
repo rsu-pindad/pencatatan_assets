@@ -72,7 +72,8 @@ $count = computed(function () {
       <x-wireui-mini-button rounded
                             secondary
                             icon="arrow-path"
-                            wire:click="$refresh" />
+                            wire:click="$refresh"
+                            spinner />
     </div>
   </div>
 </div>
