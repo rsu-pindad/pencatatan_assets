@@ -63,7 +63,7 @@ $count = computed(function(){
             1.7%
             </span>
         </span>
-        <x-wireui-mini-button rounded secondary icon="arrow-path" wire:click="$refresh" />
+        <x-wireui-mini-button rounded secondary icon="arrow-path" wire:click="$refresh" spinner />
         </div>
     </div>
 </div>
