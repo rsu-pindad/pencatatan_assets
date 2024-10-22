@@ -16,6 +16,7 @@ class Aset extends Model
     protected $fillable = [
         'kode_id',
         'prefix_aset',
+        'no_bukti',
         'nama_aset',
         'tanggal_perolehan',
         'nilai_perolehan',
