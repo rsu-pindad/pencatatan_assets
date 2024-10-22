@@ -32,10 +32,16 @@ class TipeUpdateForm extends Form
     public function update()
     {
         $this->validate();
-        $tipe            = Tipe::find($this->rowId);
-        $tipe->nama_tipe = $this->nama_tipe;
-        $tipe->save();
-        $this->reset();
+        try {
+            $tipe            = Tipe::find($this->rowId);
+            $tipe->nama_tipe = $this->nama_tipe;
+            $tipe->save();
+            $this->reset();
+
+            return true;
+        } catch (\Throwable $th) {
+            return $th->getMessage();
+        }
     }
 
     public function destroy($rowId)

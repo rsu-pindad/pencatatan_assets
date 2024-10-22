@@ -43,12 +43,12 @@ on([
     },
 ]);
 $update = action(function () {
-    try {
-        $this->form->update();
+    $update = $this->form->update();
+    if ($update) {
+        $this->dispatch('closeEditModal');
         return $this->dispatch('infoNotifikasi', title: 'satuan', description: 'satuan berhasil diperbarui!.', icon: 'success');
-    } catch (\Throwable $th) {
-        return $this->dispatch('infoNotifikasi', title: 'satuan', description: $th->getMessage(), icon: 'error');
     }
+    return $this->dispatch('infoNotifikasi', title: 'satuan', description: $update, icon: 'error');
 });
 
 ?>

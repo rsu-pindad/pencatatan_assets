@@ -93,11 +93,12 @@ title('Master Satuan');
     <livewire:master-satuan.satuan-update-form lazy
                                                wire:key="{{ uniqid() }}" />
     <livewire:master-satuan.satuan-import lazy
-                                               wire:key="{{ uniqid() }}" />
+                                          wire:key="{{ uniqid() }}" />
   @endpush
 
   @push('customScript')
-    <script type="module" data-navigate-track>
+    <script type="module"
+            data-navigate-track>
       Livewire.on('infoNotifikasi', async (event) => {
         await Livewire.dispatch('pg:eventRefresh-satuan_power_table');
         $wireui.notify({

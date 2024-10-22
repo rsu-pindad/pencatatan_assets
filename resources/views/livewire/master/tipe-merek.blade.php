@@ -94,7 +94,7 @@ title('Master Tipe-Merek');
     <livewire:master-tipe-merek.tipe-merek-update-form lazy
                                                        wire:key="{{ uniqid() }}" />
     <livewire:master-tipe-merek.tipe-merek-import lazy
-                                      wire:key="{{ uniqid() }}" />
+                                                  wire:key="{{ uniqid() }}" />
   @endpush
 
   @push('customScript')

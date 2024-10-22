@@ -44,14 +44,14 @@ final class VendorTable extends PowerGridComponent
         sleep(1);
     }
 
-    protected function queryString(): array
-    {
-        return [
-            'search' => ['except' => ''],
-            // 'page' => ['except' => 1],
-            ...$this->powerGridQueryString(),
-        ];
-    }
+    // protected function queryString(): array
+    // {
+    //     return [
+    //         'search' => ['except' => ''],
+    //         // 'page' => ['except' => 1],
+    //         ...$this->powerGridQueryString(),
+    //     ];
+    // }
 
     public function header(): array
     {

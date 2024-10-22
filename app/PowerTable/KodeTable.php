@@ -91,7 +91,7 @@ final class KodeTable extends PowerGridComponent
                 ->withoutLoading()
                 ->showToggleColumns()
                 ->showSoftDeletes(showMessage: false)
-                ->includeViewOnTop('components.power.satuan.header-top'),
+                ->includeViewOnTop('components.power.kode.header-top'),
             Footer::make()
                 ->showPerPage(perPage: 50, perPageValues: [50, 100, 500])
                 ->showRecordCount(),
