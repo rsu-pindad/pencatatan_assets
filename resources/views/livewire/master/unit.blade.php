@@ -93,11 +93,12 @@ title('Master Unit');
     <livewire:master-unit.unit-update-form lazy
                                            wire:key="{{ uniqid() }}" />
     <livewire:master-unit.unit-import lazy
-                                           wire:key="{{ uniqid() }}" />
+                                      wire:key="{{ uniqid() }}" />
   @endpush
 
   @push('customScript')
-    <script type="module" data-navigate-track>
+    <script type="module"
+            data-navigate-track>
       Livewire.on('infoNotifikasi', async (event) => {
         await Livewire.dispatch('pg:eventRefresh-unit_power_table');
         $wireui.notify({

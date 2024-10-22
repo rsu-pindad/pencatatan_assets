@@ -6,13 +6,11 @@ use function Livewire\Volt\{form, action, on};
 form(MerekForm::class);
 
 $insert = action(function () {
-    try {
-        $store = $this->form->store();
-        $this->form->reset();
+    $store = $this->form->store();
+    if ($store) {
         return $this->dispatch('infoNotifikasi', title: 'Merek', description: 'merek berhasil disimpan!.', icon: 'success');
-    } catch (\Throwable $th) {
-        return $this->dispatch('infoNotifikasi', title: 'Merek', description: $th->getMessage(), icon: 'error');
     }
+    return $this->dispatch('infoNotifikasi', title: 'Merek', description: $store, icon: 'error');
 });
 
 ?>

@@ -1,6 +1,5 @@
 <?php
 
-use App\Models\Vendor;
 use App\Livewire\Forms\Vendor\VendorUpdateForm;
 use function WireUi\Traits\WireUiActions;
 use function Livewire\Volt\{form, action, on};
@@ -44,12 +43,12 @@ on([
 ]);
 
 $update = action(function () {
-    try {
-        $this->form->update();
-        return $this->dispatch('infoNotifikasi', title: 'Vendor', description: 'vendor berhasil diperbarui!.', icon: 'success');
-    } catch (\Throwable $th) {
-        return $this->dispatch('infoNotifikasi', title: 'Vendor', description: $th->getMessage(), icon: 'error');
+    $update = $this->form->update();
+    if ($update) {
+        $this->dispatch('closeEditModal');
+        return $this->dispatch('infoNotifikasi', title: 'Vendor', description: 'Vendor berhasil diperbarui!.', icon: 'success');
     }
+    return $this->dispatch('infoNotifikasi', title: 'Vendor', description: $update, icon: 'error');
 });
 
 ?>

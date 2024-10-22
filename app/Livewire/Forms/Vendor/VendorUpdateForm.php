@@ -28,6 +28,7 @@ class VendorUpdateForm extends Form
             ],
             'keterangan_vendor' => [
                 'string',
+                'nullable'
             ],
         ];
     }
@@ -44,12 +45,18 @@ class VendorUpdateForm extends Form
     public function update()
     {
         $this->validate();
-        $vendor                    = Vendor::find($this->rowId);
-        $vendor->prefix_vendor     = $this->prefix_vendor;
-        $vendor->nama_vendor       = $this->nama_vendor;
-        $vendor->keterangan_vendor = $this->keterangan_vendor;
-        $vendor->save();
-        $this->reset();
+        try {
+            $vendor                    = Vendor::find($this->rowId);
+            $vendor->prefix_vendor     = $this->prefix_vendor;
+            $vendor->nama_vendor       = $this->nama_vendor;
+            $vendor->keterangan_vendor = $this->keterangan_vendor;
+            $vendor->save();
+            $this->reset();
+
+            return true;
+        } catch (\Throwable $th) {
+            return $th->getMessage();
+        }
     }
 
     public function destroy($rowId)
