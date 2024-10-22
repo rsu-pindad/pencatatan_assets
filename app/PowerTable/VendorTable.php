@@ -93,7 +93,7 @@ final class VendorTable extends PowerGridComponent
                 ->showSoftDeletes(showMessage: false)
                 ->includeViewOnTop('components.power.vendor.header-top'),
             Footer::make()
-                ->showPerPage(perPage: 5, perPageValues: [5, 25, 50, 100, 500])
+                ->showPerPage(perPage: 50, perPageValues: [50, 100, 500])
                 ->showRecordCount(),
         ];
     }
