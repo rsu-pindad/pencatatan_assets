@@ -6,11 +6,10 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
 class TipeMerek extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory;
 
     protected $table = 'pivot_tipe_merek';
 
@@ -35,13 +34,13 @@ class TipeMerek extends Model
         return $this->belongsTo(Merek::class, 'merek_id', 'id');
     }
 
-//     public function hasManyTipe(): HasMany
-//     {
-//         return $this->hasMany(Tipe::class, 'tipe_id', 'id');
-//     }
+    //     public function hasManyTipe(): HasMany
+    //     {
+    //         return $this->hasMany(Tipe::class, 'tipe_id', 'id');
+    //     }
 
-//     public function hasManyMerek(): HasMany
-//     {
-//         return $this->hasMany(Merek::class, 'merek_id', 'id');
-//     }
+    //     public function hasManyMerek(): HasMany
+    //     {
+    //         return $this->hasMany(Merek::class, 'merek_id', 'id');
+    //     }
 }

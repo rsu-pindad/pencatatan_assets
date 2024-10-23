@@ -10,13 +10,21 @@ class UnitForm extends Form
 {
     #[Validate('required', message: 'mohon isi nama')]
     #[Validate('min:2', message: 'minimal 2 huruf')]
-    public $nama = '';
+    #[Validate('unique:unit', message: 'nama unit sudah ada')]
+    public $nama_unit = '';
 
     public function store()
     {
         $this->validate();
-        Unit::create([
-            'nama_unit'     => $this->nama,
-        ]);
+        try {
+            Unit::create([
+                'nama_unit' => $this->nama_unit,
+            ]);
+            $this->reset();
+
+            return true;
+        } catch (\Throwable $th) {
+            return $th->getMessage();
+        }
     }
 }

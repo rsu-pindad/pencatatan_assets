@@ -6,13 +6,11 @@ use function Livewire\Volt\{form, action, on};
 form(KodeForm::class);
 
 $insert = action(function () {
-    try {
-        $store = $this->form->store();
-        $this->form->reset();
+    $store = $this->form->store();
+    if ($store) {
         return $this->dispatch('infoNotifikasi', title: 'Kode', description: 'kode berhasil disimpan!.', icon: 'success');
-    } catch (\Throwable $th) {
-        return $this->dispatch('infoNotifikasi', title: 'Kode', description: $th->getMessage(), icon: 'error');
     }
+    return $this->dispatch('infoNotifikasi', title: 'Kode', description: $store, icon: 'error');
 });
 
 ?>
@@ -36,7 +34,7 @@ $insert = action(function () {
       <div class="my-6">
         <form wire:submit="insert">
           <div class="mt-3">
-            <x-wireui-input wire:model="form.prefix"
+            <x-wireui-input wire:model="form.prefix_kode"
                             with-validation-colors=true
                             corner="min:2"
                             label="Prefix Kode"

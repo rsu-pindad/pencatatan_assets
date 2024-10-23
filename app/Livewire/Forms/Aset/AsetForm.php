@@ -50,22 +50,29 @@ class AsetForm extends Form
         // dd($this->nilai);
         // $this->nilai = str_replace('.', '', $this->nilai);
         $data = [];
-        if ($this->photo != null) {
-            $photoName = $this->photo->hashName();
-            Storage::disk('public')->putFileAs('asset_photo', $this->photo, $photoName);
+        try {
+            if ($this->photo != null) {
+                $photoName = $this->photo->hashName();
+                Storage::disk('public')->putFileAs('asset_photo', $this->photo, $photoName);
+            }
+            Aset::create([
+                'kode_id'             => $this->kode,
+                'prefix_aset'         => $this->kode . '-' . $this->nama,
+                'nama_aset'           => $this->nama,
+                'tanggal_perolehan'   => $this->tglPerolehan,
+                'nilai_perolehan'     => $this->nilai,
+                'satuan_id'           => $this->satuan,
+                'jumlah'              => $this->jumlah,
+                'vendor_id'           => $this->vendor,
+                'pivot_tipe_merek_id' => $this->tipeMerek ?? null,
+                'unit_id'             => $this->unit,
+                'image_aset'          => $photoName,
+            ]);
+            $this->reset();
+
+            return true;
+        } catch (\Throwable $th) {
+            return $th->getMessage();
         }
-        Aset::create([
-            'kode_id'             => $this->kode,
-            'prefix_aset'         => $this->kode . '-' . $this->nama,
-            'nama_aset'           => $this->nama,
-            'tanggal_perolehan'   => $this->tglPerolehan,
-            'nilai_perolehan'     => $this->nilai,
-            'satuan_id'           => $this->satuan,
-            'jumlah'              => $this->jumlah,
-            'vendor_id'           => $this->vendor,
-            'pivot_tipe_merek_id' => $this->tipeMerek ?? null,
-            'unit_id'             => $this->unit,
-            'image_aset'          => $photoName,
-        ]);
     }
 }

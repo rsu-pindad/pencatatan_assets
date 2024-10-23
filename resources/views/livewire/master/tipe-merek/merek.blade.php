@@ -100,12 +100,15 @@ title('Master merek');
                                            wire:key="{{ uniqid() }}" />
     <livewire:master-tipe-merek.merek-update-form lazy
                                                   wire:key="{{ uniqid() }}" />
+    <livewire:master-tipe-merek.merek-import lazy
+                                             wire:key="{{ uniqid() }}" />
   @endpush
 
   @push('customScript')
-    <script type="module" data-navigate-track>
+    <script type="module"
+            data-navigate-track>
       Livewire.on('infoNotifikasi', async (event) => {
-        await Livewire.dispatch('pg:eventRefresh-merek');
+        await Livewire.dispatch('pg:eventRefresh-merek_power_table');
         $wireui.notify({
           title: event.title,
           description: event.description,

@@ -8,13 +8,11 @@ usesFileUploads();
 form(AsetForm::class);
 
 $insert = action(function () {
-    try {
-        $store = $this->form->store();
-        $this->form->reset();
+    $store = $this->form->store();
+    if ($store) {
         return $this->dispatch('infoNotifikasi', title: 'Aset', description: 'aset berhasil disimpan!.', icon: 'success');
-    } catch (\Throwable $th) {
-        return $this->dispatch('infoNotifikasi', title: 'Aset', description: $th->getMessage(), icon: 'error');
     }
+    return $this->dispatch('infoNotifikasi', title: 'Aset', description: $store, icon: 'error');
 });
 ?>
 

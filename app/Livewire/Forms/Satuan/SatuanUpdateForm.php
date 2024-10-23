@@ -23,9 +23,11 @@ class SatuanUpdateForm extends Form
             ],
             'konversi_satuan' => [
                 'numeric',
+                'nullable'
             ],
             'keterangan_satuan' => [
                 'string',
+                'nullable'
             ],
         ];
     }
@@ -42,12 +44,18 @@ class SatuanUpdateForm extends Form
     public function update()
     {
         $this->validate();
-        $satuan                    = Satuan::find($this->rowId);
-        $satuan->nama_satuan       = $this->nama_satuan;
-        $satuan->konversi_satuan   = $this->konversi_satuan;
-        $satuan->keterangan_satuan = $this->keterangan_satuan;
-        $satuan->save();
-        $this->reset();
+        try {
+            $satuan                    = Satuan::find($this->rowId);
+            $satuan->nama_satuan       = $this->nama_satuan;
+            $satuan->konversi_satuan   = $this->konversi_satuan;
+            $satuan->keterangan_satuan = $this->keterangan_satuan;
+            $satuan->save();
+            $this->reset();
+
+            return true;
+        } catch (\Throwable $th) {
+            return $th->getMessage();
+        }
     }
 
     public function destroy($rowId)

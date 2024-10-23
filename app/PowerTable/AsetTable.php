@@ -33,30 +33,35 @@ final class AsetTable extends PowerGridComponent
     use WithExport;
 
     #[Locked]
-    public string $tableName = 'aset';
+    public string $tableName = 'aset_power_table';
 
-    public bool $deferLoading = true;
-    public string $strRandom  = '';
+    public bool $showFilters        = true;
+    public bool $deferLoading       = true;
+    public string $strRandom        = '';
+    public string $loadingComponent = 'components.power.spinner-loading';
+
+    public function boot(): void
+    {
+        config(['livewire-powergrid.filter' => 'outside']);
+    }
 
     public function hydrate(): void
     {
         sleep(1);
     }
 
-    protected function queryString(): array
-    {
-        return [
-            'search' => ['except' => ''],
-            // 'page' => ['except' => 1],
-            ...$this->powerGridQueryString(),
-        ];
-    }
+    // protected function queryString(): array
+    // {
+    //     return [
+    //         'search' => ['except' => ''],
+    //         // 'page' => ['except' => 1],
+    //         ...$this->powerGridQueryString(),
+    //     ];
+    // }
 
     public function header(): array
     {
         return [
-            Button::add('segarkan')
-                ->slot('<x-wireui-mini-button sm rounded secondary icon="arrow-path" wire:click="$refresh" spinner />'),
             Button::add('bulk-delete')
                 ->slot('<x-heroicons::outline.trash class="w-5 h-5" />(<span x-text="window.pgBulkActions.count(\'' . $this->tableName . '\')"></span>)')
                 ->class('pg-btn-white dark:ring-pg-primary-600 dark:border-pg-primary-600 dark:hover:bg-pg-primary-700 dark:ring-offset-pg-primary-800 dark:text-pg-primary-300 dark:bg-pg-primary-700')
@@ -90,11 +95,12 @@ final class AsetTable extends PowerGridComponent
             // ->onQueue('pg-exportKode'),
             // ->onConnection('redis'),
             Header::make()
+                ->withoutLoading()
                 ->showToggleColumns()
-                ->showSoftDeletes(showMessage: false),
-            // ->withoutLoading(),
+                ->showSoftDeletes(showMessage: false)
+                ->includeViewOnTop('components.power.aset.header-top'),
             Footer::make()
-                ->showPerPage(perPage: 5, perPageValues: [5, 25, 50, 100, 500])
+                ->showPerPage(perPage: 50, perPageValues: [50, 100, 500])
                 ->showRecordCount(),
         ];
     }
@@ -116,6 +122,7 @@ final class AsetTable extends PowerGridComponent
                    ->add('id')
                    ->add('kode_id')
                    ->add('prefix_aset')
+                   ->add('no_bukti')
                    ->add('nama_aset')
                    //    ->add('tanggal_perolehan')
                    ->add('tanggal_perolehan_formatted', fn(Aset $model) => Carbon::parse($model->tanggal_perolehan)->translatedFormat('d F Y'))
@@ -156,12 +163,17 @@ final class AsetTable extends PowerGridComponent
             Column::make('Id', 'id')
                 ->hidden(isHidden: true, isForceHidden: true)
                 ->visibleInExport(true),
+            Column::make('No', 'id')
+                ->index(),
             Column::make('Kode', 'kode_id')
                 ->hidden(isHidden: true, isForceHidden: true)
                 ->visibleInExport(true),
             Column::make('Prefix aset', 'prefix_aset')
                 ->hidden(isHidden: true, isForceHidden: true)
                 ->visibleInExport(true)
+                ->sortable()
+                ->searchable(),
+            Column::make('No Bukti', 'no_bukti')
                 ->sortable()
                 ->searchable(),
             Column::make('Nama aset', 'nama_aset')
@@ -191,11 +203,16 @@ final class AsetTable extends PowerGridComponent
     public function filters(): array
     {
         return [
-            Filter::inputText('nama_aset')->placeholder('cari nama aset'),
+            Filter::inputText('nama_aset')
+                ->operators(['contains', 'is', 'is_not'])
+                ->placeholder('cari nama aset'),
+            Filter::inputText('no_bukti')
+                ->operators(['contains', 'is', 'is_not'])
+                ->placeholder('cari no bukti aset'),
             Filter::datepicker('tanggal_perolehan'),
             Filter::select('satuan_id_formatted', 'satuan_id')
                 ->dataSource(Satuan::all())
-                ->optionLabel('nama_satuan')
+                ->optionLabel('keterangan_satuan')
                 ->optionValue('id'),
             Filter::select('vendor_id_formatted', 'vendor_id')
                 ->dataSource(Vendor::all())
