@@ -177,18 +177,18 @@ final class TipeMerekTable extends PowerGridComponent
                 ->tooltip('hapus')
                 ->class('pg-btn-white dark:ring-pg-primary-600 dark:border-pg-primary-600 dark:hover:bg-pg-primary-700 dark:ring-offset-pg-primary-800 dark:text-pg-primary-300 dark:bg-pg-primary-700')
                 ->dispatch('hapus', ['rowId' => $row->id]),
-            Button::add('pulihkan')
-                ->slot('<x-heroicons::solid.arrow-uturn-left class="w-4 h-4" />')
-                ->id()
-                ->tooltip('pulihkan')
-                ->class('pg-btn-white dark:ring-pg-primary-600 dark:border-pg-primary-600 dark:hover:bg-pg-primary-700 dark:ring-offset-pg-primary-800 dark:text-pg-primary-300 dark:bg-pg-primary-700')
-                ->dispatch('pulihkan', ['rowId' => $row->id]),
-            Button::add('permanen-delete')
-                ->slot('<x-heroicons::solid.x-circle class="w-4 h-4" />')
-                ->tooltip('permanent hapus')
-                ->id()
-                ->class('pg-btn-white dark:ring-pg-primary-600 dark:border-pg-primary-600 dark:hover:bg-pg-primary-700 dark:ring-offset-pg-primary-800 dark:text-pg-primary-300 dark:bg-pg-primary-700')
-                ->dispatch('permanenDelete', ['rowId' => $row->id]),
+            // Button::add('pulihkan')
+            //     ->slot('<x-heroicons::solid.arrow-uturn-left class="w-4 h-4" />')
+            //     ->id()
+            //     ->tooltip('pulihkan')
+            //     ->class('pg-btn-white dark:ring-pg-primary-600 dark:border-pg-primary-600 dark:hover:bg-pg-primary-700 dark:ring-offset-pg-primary-800 dark:text-pg-primary-300 dark:bg-pg-primary-700')
+            //     ->dispatch('pulihkan', ['rowId' => $row->id]),
+            // Button::add('permanen-delete')
+            //     ->slot('<x-heroicons::solid.x-circle class="w-4 h-4" />')
+            //     ->tooltip('permanent hapus')
+            //     ->id()
+            //     ->class('pg-btn-white dark:ring-pg-primary-600 dark:border-pg-primary-600 dark:hover:bg-pg-primary-700 dark:ring-offset-pg-primary-800 dark:text-pg-primary-300 dark:bg-pg-primary-700')
+            //     ->dispatch('permanenDelete', ['rowId' => $row->id]),
         ];
     }
 
