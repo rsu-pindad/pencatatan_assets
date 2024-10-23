@@ -1,0 +1,3 @@
+ancestorEntries = ["config/app.php"]
+ourEntries = ["config/app.php", "resources/views/livewire/master-aset/aset-import.blade.php"]
+theirEntries = ["config/app.php", "resources/views/livewire/master-aset/aset-import.blade.php"]
