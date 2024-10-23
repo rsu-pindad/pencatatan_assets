@@ -10,13 +10,21 @@ class MerekForm extends Form
 {
     #[Validate('required', message: 'mohon isi prefix')]
     #[Validate('min:2', message: 'minimal 2 huruf')]
-    public $nama = '';
+    #[Validate('unique:merek', message: 'nama merek sudah ada')]
+    public $nama_merek = '';
 
     public function store()
     {
         $this->validate();
-        Merek::create([
-            'nama_merek' => $this->nama,
-        ]);
+        try {
+            Merek::create([
+                'nama_merek' => $this->nama_merek,
+            ]);
+            $this->reset();
+
+            return true;
+        } catch (\Throwable $th) {
+            return $th->getMessage();
+        }
     }
 }

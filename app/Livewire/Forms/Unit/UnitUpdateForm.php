@@ -32,10 +32,16 @@ class UnitUpdateForm extends Form
     public function update()
     {
         $this->validate();
-        $unit            = Unit::find($this->rowId);
-        $unit->nama_unit = $this->nama_unit;
-        $unit->save();
-        $this->reset();
+        try {
+            $unit            = Unit::find($this->rowId);
+            $unit->nama_unit = $this->nama_unit;
+            $unit->save();
+            $this->reset();
+
+            return true;
+        } catch (\Throwable $th) {
+            return $th->getMessage();
+        }
     }
 
     public function destroy($rowId)

@@ -16,6 +16,7 @@ class Aset extends Model
     protected $fillable = [
         'kode_id',
         'prefix_aset',
+        'no_bukti',
         'nama_aset',
         'tanggal_perolehan',
         'nilai_perolehan',
@@ -32,6 +33,11 @@ class Aset extends Model
         'created_at',
         'updated_at'
     ];
+
+    public function parentKode(): BelongsTo
+    {
+        return $this->belongsTo(Kode::class, 'kode_id', 'id');
+    }
 
     public function parentSatuan(): BelongsTo
     {

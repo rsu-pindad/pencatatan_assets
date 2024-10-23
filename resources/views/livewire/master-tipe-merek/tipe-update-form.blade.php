@@ -44,12 +44,11 @@ on([
 ]);
 
 $update = action(function () {
-    try {
-        $this->form->update();
+    $updating = $this->form->update();
+    if ($updating) {
         return $this->dispatch('infoNotifikasi', title: 'Tipe', description: 'tipe berhasil diperbarui!.', icon: 'success');
-    } catch (\Throwable $th) {
-        return $this->dispatch('infoNotifikasi', title: 'Tipe', description: $th->getMessage(), icon: 'error');
     }
+    return $this->dispatch('infoNotifikasi', title: 'Tipe', description: $updating, icon: 'error');
 });
 
 ?>

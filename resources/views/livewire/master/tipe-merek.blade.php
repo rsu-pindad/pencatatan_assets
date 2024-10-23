@@ -93,10 +93,13 @@ title('Master Tipe-Merek');
                                                 wire:key="{{ uniqid() }}" />
     <livewire:master-tipe-merek.tipe-merek-update-form lazy
                                                        wire:key="{{ uniqid() }}" />
+    <livewire:master-tipe-merek.tipe-merek-import lazy
+                                                  wire:key="{{ uniqid() }}" />
   @endpush
 
   @push('customScript')
-    <script type="module" data-navigate-track>
+    <script type="module"
+            data-navigate-track>
       Livewire.on('infoNotifikasi', async (event) => {
         await Livewire.dispatch('pg:eventRefresh-pivot_tipe_merek');
         $wireui.notify({

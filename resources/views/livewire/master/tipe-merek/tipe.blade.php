@@ -99,12 +99,15 @@ title('Master Tipe');
                                           wire:key="{{ uniqid() }}" />
     <livewire:master-tipe-merek.tipe-update-form lazy
                                                  wire:key="{{ uniqid() }}" />
+    <livewire:master-tipe-merek.tipe-import lazy
+                                            wire:key="{{ uniqid() }}" />
   @endpush
 
   @push('customScript')
-    <script type="module" data-navigate-track>
+    <script type="module"
+            data-navigate-track>
       Livewire.on('infoNotifikasi', async (event) => {
-        await Livewire.dispatch('pg:eventRefresh-tipe');
+        await Livewire.dispatch('pg:eventRefresh-tipe_power_table');
         $wireui.notify({
           title: event.title,
           description: event.description,
