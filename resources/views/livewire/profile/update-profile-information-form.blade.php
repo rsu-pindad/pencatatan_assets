@@ -10,7 +10,7 @@ use Illuminate\Validation\Rule;
 use function Livewire\Volt\state;
 
 state([
-    'name' => fn () => auth()->user()->name,
+    'npp' => fn () => auth()->user()->npp,
     'email' => fn () => auth()->user()->email
 ]);
 
@@ -18,7 +18,7 @@ $updateProfileInformation = function () {
     $user = Auth::user();
 
     $validated = $this->validate([
-        'name' => ['required', 'string', 'max:255'],
+        'npp' => ['required', 'string', 'digits:5'],
         'email' => ['required', 'string', 'lowercase', 'email', 'max:255', Rule::unique(User::class)->ignore($user->id)],
     ]);
 
@@ -49,22 +49,22 @@ $sendVerification = function () {
 
 ?>
 
-<section>
+<section class="p-4">
     <header>
         <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">
-            {{ __('Profile Information') }}
+            {{ __('Informasi Profil') }}
         </h2>
 
         <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
-            {{ __("Update your account's profile information and email address.") }}
+            {{ __("Perbarui informasi profil dan alamat email akun Anda.") }}
         </p>
     </header>
 
     <form wire:submit="updateProfileInformation" class="mt-6 space-y-6">
         <div>
-            <x-input-label for="name" :value="__('Name')" />
-            <x-text-input wire:model="name" id="name" name="name" type="text" class="mt-1 block w-full" required autofocus autocomplete="name" />
-            <x-input-error class="mt-2" :messages="$errors->get('name')" />
+            <x-input-label for="npp" :value="__('Npp')" />
+            <x-text-input wire:model="npp" id="npp" npp="npp" type="text" class="mt-1 block w-full" required autofocus autocomplete="npp" />
+            <x-input-error class="mt-2" :messages="$errors->get('npp')" />
         </div>
 
         <div>
@@ -92,10 +92,10 @@ $sendVerification = function () {
         </div>
 
         <div class="flex items-center gap-4">
-            <x-primary-button>{{ __('Save') }}</x-primary-button>
+            <x-primary-button>{{ __('Simpan') }}</x-primary-button>
 
             <x-action-message class="me-3" on="profile-updated">
-                {{ __('Saved.') }}
+                {{ __('Tersimpan.') }}
             </x-action-message>
         </div>
     </form>

@@ -69,7 +69,7 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    'timezone' => 'Asia/Jakarta',
 
     /*
     |--------------------------------------------------------------------------
@@ -82,7 +82,7 @@ return [
     |
     */
 
-    'locale' => 'en',
+    'locale' => 'id',
 
     /*
     |--------------------------------------------------------------------------
@@ -108,7 +108,7 @@ return [
     |
     */
 
-    'faker_locale' => 'en_US',
+    'faker_locale' => 'id_ID',
 
     /*
     |--------------------------------------------------------------------------
@@ -185,6 +185,7 @@ return [
         /*
          * Package Service Providers...
          */
+        Spatie\Permission\PermissionServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -212,5 +213,14 @@ return [
     'aliases' => Facade::defaultAliases()->merge([
         // 'ExampleClass' => App\Example\ExampleClass::class,
     ])->toArray(),
+
+    'seeder_default' => env('APP_SEEDER',''),
+    'import_template_unit' => env('TEMPLATE_UNIT',''),
+    'import_template_tipe' => env('TEMPLATE_TIPE',''),
+    'import_template_merek' => env('TEMPLATE_MEREK',''),
+    'import_template_tipemerek' => env('TEMPLATE_TIPEMEREK',''),
+    'import_template_vendor' => env('TEMPLATE_VENDOR',''),
+    'import_template_satuan' => env('TEMPLATE_SATUAN',''),
+    'import_template_kode' => env('TEMPLATE_KODE',''),
 
 ];
