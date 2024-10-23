@@ -46,7 +46,7 @@ class UnitImport implements ToModel, WithStartRow, WithChunkReading, WithUpserts
 
     public function limit(): int
     {
-        return $this->akhir;
+        return $this->akhir - 1;
     }
 
     public function chunkSize(): int
