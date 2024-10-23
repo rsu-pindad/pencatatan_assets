@@ -93,12 +93,14 @@ title('Master Aset');
                                     wire:key="{{ uniqid() }}" />
     <livewire:master-aset.aset-update-form lazy
                                            wire:key="{{ uniqid() }}" />
+    <livewire:master-aset.aset-import lazy
+                                      wire:key="{{ uniqid() }}" />
   @endpush
 
   @push('customScript')
     <script type="module">
       Livewire.on('infoNotifikasi', async (event) => {
-        await Livewire.dispatch('pg:eventRefresh-aset');
+        await Livewire.dispatch('pg:eventRefresh-aset_power_table');
         $wireui.notify({
           title: event.title,
           description: event.description,
@@ -112,7 +114,7 @@ title('Master Aset');
         await Livewire.dispatch('executeHapus', {
           rowId: event
         });
-        Livewire.dispatch('pg:eventRefresh-aset');
+        Livewire.dispatch('pg:eventRefresh-aset_power_table');
       });
     </script>
   @endpush
