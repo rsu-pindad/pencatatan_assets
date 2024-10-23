@@ -40,7 +40,7 @@ on([
     'downloadImport' => function () {
         try {
             $path = config('app.import_template_aset');
-            return Storage::disk('public')->download($path);
+            return Storage::disk('public')->download($path, 'template_aset.xlsx');
         } catch (\Throwable $th) {
             return $this->dispatch('infoNotifikasi', title: 'Aset', description: $th->getMessage(), icon: 'error');
         }
