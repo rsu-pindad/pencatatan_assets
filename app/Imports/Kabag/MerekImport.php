@@ -46,7 +46,7 @@ class MerekImport implements ToModel, WithStartRow, WithChunkReading, WithUpsert
 
     public function limit(): int
     {
-        return $this->akhir;
+        return $this->akhir - 1;
     }
 
     public function chunkSize(): int
