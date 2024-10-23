@@ -14,6 +14,7 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Number;
 use Illuminate\Support\Str;
+use Laraindo\RupiahFormat;
 use Livewire\Attributes\Locked;
 use Livewire\Attributes\On;
 use PowerComponents\LivewirePowerGrid\Facades\Filter;
@@ -117,20 +118,26 @@ final class AsetTable extends PowerGridComponent
 
     public function fields(): PowerGridFields
     {
-        // text-end
         return PowerGrid::fields()
                    ->add('id')
-                   ->add('kode_id')
-                   ->add('prefix_aset')
+                   ->add('kode_id', function ($aset) {
+                       return e($aset->parentKode->prefix_kode);
+                   })
+                   ->add('prefix_aset', function ($aset) {
+                       return e($aset->prefix_aset);
+                   })
+                   ->add('kode_aset_prefix', function ($aset) {
+                       return e($aset->parentKode->prefix_kode) .'.'. e($aset->prefix_aset);
+                   })
                    ->add('no_bukti')
                    ->add('nama_aset')
                    //    ->add('tanggal_perolehan')
                    ->add('tanggal_perolehan_formatted', fn(Aset $model) => Carbon::parse($model->tanggal_perolehan)->translatedFormat('d F Y'))
                    //    ->add('nilai_perolehan')
-                   ->add('nilai_perolehan_formatted', fn(Aset $model) => Number::currency($model->nilai_perolehan, 'RUPIAH', 'id'))
+                   ->add('nilai_perolehan_formatted', fn(Aset $model) => RupiahFormat::currency($model->nilai_perolehan))
                    //    ->add('satuan_id')
                    ->add('satuan_id_formatted', function ($aset) {
-                       return e($aset->parentSatuan->nama_satuan);
+                       return e($aset->parentSatuan->keterangan_satuan);
                    })
                    ->add('jumlah')
                    ->add('vendor_id_formatted', function ($aset) {
@@ -165,36 +172,32 @@ final class AsetTable extends PowerGridComponent
                 ->visibleInExport(true),
             Column::make('No', 'id')
                 ->index(),
-            Column::make('Kode', 'kode_id')
-                ->hidden(isHidden: true, isForceHidden: true)
-                ->visibleInExport(true),
-            Column::make('Prefix aset', 'prefix_aset')
-                ->hidden(isHidden: true, isForceHidden: true)
-                ->visibleInExport(true)
-                ->sortable()
-                ->searchable(),
+            Column::make('Kode', 'kode_aset_prefix'),
+            // Column::make('Kode', 'kode_id')
+            //     ->sortable()
+            //     ->searchable(),
+            // Column::make('Prefix Aset', 'prefix_aset')
+            //     ->sortable()
+            //     ->searchable(),
             Column::make('No Bukti', 'no_bukti')
                 ->sortable()
                 ->searchable(),
-            Column::make('Nama aset', 'nama_aset')
+            Column::make('Nama Aset', 'nama_aset')
                 ->sortable()
                 ->searchable(),
-            Column::make('Tgl perolehan', 'tanggal_perolehan_formatted', 'tanggal_perolehan')
+            Column::make('Tgl Perolehan', 'tanggal_perolehan_formatted', 'tanggal_perolehan')
                 ->sortable(),
-            Column::make('Nilai perolehan', 'nilai_perolehan_formatted', 'nilai_perolehan')
+            Column::make('Nilai Perolehan', 'nilai_perolehan_formatted', 'nilai_perolehan')
                 ->sortable()
                 ->searchable(),
-            Column::make('Jml', 'jumlah')
-                ->sortable()
-                ->searchable(),
+            Column::make('Jumlah Aset', 'jumlah')
+                ->sortable(),
             Column::make('Satuan', 'satuan_id_formatted', 'satuan_id'),
             Column::make('Vendor', 'vendor_id_formatted', 'vendor_id'),
             Column::make('Tipe', 'pivot_tipe_merek_id_format_tipe', 'pivot_tipe_merek_id'),
             Column::make('Merek', 'pivot_tipe_merek_id_format_merek', 'pivot_tipe_merek_id'),
             Column::make('Unit', 'unit_id_formatted', 'unit_id'),
-            Column::make('Foto', 'image_aset')
-                ->sortable()
-                ->searchable(),
+            Column::make('Foto', 'image_aset'),
             Column::action('Aksi')
                 ->visibleInExport(false),
         ];
