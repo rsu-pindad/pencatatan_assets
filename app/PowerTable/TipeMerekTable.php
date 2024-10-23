@@ -207,24 +207,24 @@ final class TipeMerekTable extends PowerGridComponent
         }
     }
 
-    public function actionRules($row): array
-    {
-        return [
-            Rule::button('hapus')
-                ->when(fn(TipeMerek $tipeMerek) => $tipeMerek->trashed() == true)
-                ->hide(),
-            Rule::button('bulk-delete')
-                ->when(fn(TipeMerek $tipeMerek) => $tipeMerek->trashed() == false)
-                ->hide(),
-            Rule::button('pulihkan')
-                ->when(fn(TipeMerek $tipeMerek) => $tipeMerek->trashed() == false)
-                ->hide(),
-            Rule::button('permanen-delete')
-                ->when(fn(TipeMerek $tipeMerek) => $tipeMerek->trashed() == false)
-                ->hide(),
-            Rule::checkbox()
-                ->when(fn(TipeMerek $tipeMerek) => $tipeMerek->trashed() == true)
-                ->hide(),
-        ];
-    }
+    // public function actionRules($row): array
+    // {
+    //     return [
+    //         Rule::button('hapus')
+    //             ->when(fn(TipeMerek $tipeMerek) => $tipeMerek->trashed() == true)
+    //             ->hide(),
+    //         Rule::button('bulk-delete')
+    //             ->when(fn(TipeMerek $tipeMerek) => $tipeMerek->trashed() == false)
+    //             ->hide(),
+    //         Rule::button('pulihkan')
+    //             ->when(fn(TipeMerek $tipeMerek) => $tipeMerek->trashed() == false)
+    //             ->hide(),
+    //         Rule::button('permanen-delete')
+    //             ->when(fn(TipeMerek $tipeMerek) => $tipeMerek->trashed() == false)
+    //             ->hide(),
+    //         Rule::checkbox()
+    //             ->when(fn(TipeMerek $tipeMerek) => $tipeMerek->trashed() == true)
+    //             ->hide(),
+    //     ];
+    // }
 }
