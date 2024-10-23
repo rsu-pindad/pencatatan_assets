@@ -36,6 +36,17 @@ $import = function () {
     }
 };
 
+on([
+    'downloadImport' => function () {
+        try {
+            $path = config('app.import_template_aset');
+            return Storage::disk('public')->download($path);
+        } catch (\Throwable $th) {
+            return $this->dispatch('infoNotifikasi', title: 'Aset', description: $th->getMessage(), icon: 'error');
+        }
+    },
+]);
+
 ?>
 
 <div>
