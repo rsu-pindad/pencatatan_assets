@@ -10,8 +10,8 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::table('unit', function (Blueprint $table) {
-            $table->string('nama_unit')->change()->unique();
+        Schema::table('aset', function (Blueprint $table) {
+            $table->dropUnique('aset_no_bukti_unique');
         });
     }
 
@@ -20,8 +20,8 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::table('unit', function (Blueprint $table) {
-            $table->dropUnique('nama_unit');
+        Schema::table('aset', function (Blueprint $table) {
+            $table->string('no_bukti')->change()->unique();
         });
     }
 };
