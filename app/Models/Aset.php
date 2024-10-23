@@ -34,6 +34,11 @@ class Aset extends Model
         'updated_at'
     ];
 
+    public function parentKode(): BelongsTo
+    {
+        return $this->belongsTo(Kode::class, 'kode_id', 'id');
+    }
+
     public function parentSatuan(): BelongsTo
     {
         return $this->belongsTo(Satuan::class, 'satuan_id', 'id');
