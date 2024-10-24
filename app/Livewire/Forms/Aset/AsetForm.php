@@ -6,11 +6,15 @@ use App\Models\Aset;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Attributes\Validate;
 use Livewire\Form;
+use App\Models\Kode;
 
 class AsetForm extends Form
 {
     #[Validate('required', message: 'mohon isi kode')]
     public $kode = '';
+
+    #[Validate('required', message: 'mohon isi no bukti')]
+    public $noBukti = '';
 
     #[Validate('required', message: 'mohon isi nama')]
     public $nama = '';
@@ -55,9 +59,12 @@ class AsetForm extends Form
                 $photoName = $this->photo->hashName();
                 Storage::disk('public')->putFileAs('asset_photo', $this->photo, $photoName);
             }
+            $lastPrefix = Aset::where('kode_id',$this->kode)->withTrashed()->count();
+            $newPrefix = str_pad(intval($lastPrefix) + 1, 3, 0, STR_PAD_LEFT);
             Aset::create([
                 'kode_id'             => $this->kode,
-                'prefix_aset'         => $this->kode . '-' . $this->nama,
+                'no_bukti'            => $this->noBukti,
+                'prefix_aset'         => $newPrefix,
                 'nama_aset'           => $this->nama,
                 'tanggal_perolehan'   => $this->tglPerolehan,
                 'nilai_perolehan'     => $this->nilai,

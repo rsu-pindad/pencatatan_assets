@@ -151,7 +151,7 @@ title('Master Kode');
         await Livewire.dispatch('executeHapus', {
           rowId: event
         });
-        Livewire.dispatch('pg:eventRefresh-kode');
+        Livewire.dispatch('pg:eventRefresh-kode_power_table');
       });
       Livewire.on('pulihkan', async (event) => {
         // window.$wireui.confirmDialog({
@@ -175,7 +175,7 @@ title('Master Kode');
         await Livewire.dispatch('executePulihkan', {
           rowId: event
         });
-        Livewire.dispatch('pg:eventRefresh-kode');
+        Livewire.dispatch('pg:eventRefresh-kode_power_table');
       });
       Livewire.on('closeEditModal', () => {
         $closeModal('editModal');

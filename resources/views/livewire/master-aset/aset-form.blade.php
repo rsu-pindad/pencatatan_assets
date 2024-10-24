@@ -44,8 +44,16 @@ $insert = action(function () {
                                    'api' => route('data-kode'),
                                    'method' => 'GET',
                                ]"
-                               option-label="prefix_kode"
+                               option-label="keterangan_kode"
                                option-value="id" />
+            </div>
+            <div class="inline-block">
+              <x-wireui-input wire:model.blur="form.noBukti"
+                              with-validation-colors=true
+                              label="No Bukti"
+                              icon="document-text"
+                              placeholder="masukan no bukti"
+                              type="text" />
             </div>
             <div class="inline-block">
               <x-wireui-input wire:model.blur="form.nama"
@@ -88,7 +96,7 @@ $insert = action(function () {
                                    'api' => route('data-satuan'),
                                    'method' => 'GET',
                                ]"
-                               option-label="nama_satuan"
+                               option-label="keterangan_satuan"
                                option-value="id" />
             </div>
             <div class="inline-block">
