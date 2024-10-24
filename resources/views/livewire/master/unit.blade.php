@@ -118,13 +118,13 @@ title('Master Unit');
         await Livewire.dispatch('executeHapus', {
           rowId: event
         });
-        Livewire.dispatch('pg:eventRefresh-unit');
+        Livewire.dispatch('pg:eventRefresh-unit_power_table');
       });
       Livewire.on('pulihkan', async (event) => {
         await Livewire.dispatch('executePulihkan', {
           rowId: event
         });
-        Livewire.dispatch('pg:eventRefresh-unit');
+        Livewire.dispatch('pg:eventRefresh-unit_power_table');
       });
       Livewire.on('closeEditModal', () => {
         $closeModal('editModal');

@@ -119,13 +119,13 @@ title('Master Vendor');
         await Livewire.dispatch('executeHapus', {
           rowId: event
         });
-        Livewire.dispatch('pg:eventRefresh-vendor');
+        Livewire.dispatch('pg:eventRefresh-vendor_power_table');
       });
       Livewire.on('pulihkan', async (event) => {
         await Livewire.dispatch('executePulihkan', {
           rowId: event
         });
-        Livewire.dispatch('pg:eventRefresh-vendor');
+        Livewire.dispatch('pg:eventRefresh-vendor_power_table');
       });
       Livewire.on('closeEditModal', () => {
         $closeModal('editModal');
