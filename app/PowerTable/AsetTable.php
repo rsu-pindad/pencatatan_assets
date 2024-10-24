@@ -127,14 +127,15 @@ final class AsetTable extends PowerGridComponent
                        return e($aset->prefix_aset);
                    })
                    ->add('kode_aset_prefix', function ($aset) {
-                       return e($aset->parentKode->prefix_kode) .'.'. e($aset->prefix_aset);
+                       return e($aset->parentKode->prefix_kode) . '.' . e($aset->prefix_aset);
                    })
                    ->add('no_bukti')
                    ->add('nama_aset')
                    //    ->add('tanggal_perolehan')
                    ->add('tanggal_perolehan_formatted', fn(Aset $model) => Carbon::parse($model->tanggal_perolehan)->translatedFormat('d F Y'))
                    //    ->add('nilai_perolehan')
-                   ->add('nilai_perolehan_formatted', fn(Aset $model) => RupiahFormat::currency($model->nilai_perolehan))
+                   //    ->add('nilai_perolehan_formatted', fn(Aset $model) => RupiahFormat::currency($model->nilai_perolehan))
+                   ->add('nilai_perolehan_formatted', fn(Aset $model) => Number::format($model->nilai_perolehan, maxPrecision: 2, locale: 'id'))
                    //    ->add('satuan_id')
                    ->add('satuan_id_formatted', function ($aset) {
                        return e($aset->parentSatuan->keterangan_satuan);
@@ -188,9 +189,12 @@ final class AsetTable extends PowerGridComponent
             Column::make('Tgl Perolehan', 'tanggal_perolehan_formatted', 'tanggal_perolehan')
                 ->sortable(),
             Column::make('Nilai Perolehan', 'nilai_perolehan_formatted', 'nilai_perolehan')
+                // ->bodyAttribute('text-right', 'color:red')
+                ->bodyAttribute('text-right')
                 ->sortable()
                 ->searchable(),
             Column::make('Jumlah Aset', 'jumlah')
+                ->bodyAttribute('text-right')
                 ->sortable(),
             Column::make('Satuan', 'satuan_id_formatted', 'satuan_id'),
             Column::make('Vendor', 'vendor_id_formatted', 'vendor_id'),
@@ -239,6 +243,12 @@ final class AsetTable extends PowerGridComponent
     public function actions(Aset $row): array
     {
         return [
+            Button::add('edit')
+                ->slot('<x-heroicons::solid.pencil class="w-4 h-4" />')
+                ->id()
+                ->tooltip('edit')
+                ->class('pg-btn-white dark:ring-pg-primary-600 dark:border-pg-primary-600 dark:hover:bg-pg-primary-700 dark:ring-offset-pg-primary-800 dark:text-pg-primary-300 dark:bg-pg-primary-700')
+                ->dispatch('edit', ['rowId' => $row->id]),
             Button::add('hapus')
                 ->slot('<x-heroicons::solid.trash class="w-4 h-4" />')
                 ->id()
@@ -278,6 +288,9 @@ final class AsetTable extends PowerGridComponent
     public function actionRules($row): array
     {
         return [
+            Rule::button('edit')
+                ->when(fn(Aset $aset) => $aset->trashed() == true)
+                ->hide(),
             Rule::button('hapus')
                 ->when(fn(Aset $aset) => $aset->trashed() == true)
                 ->hide(),

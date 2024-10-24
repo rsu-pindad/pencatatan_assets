@@ -110,11 +110,39 @@ title('Master Aset');
       Livewire.on('create', (event) => {
         $openModal('createModal');
       });
+      Livewire.on('pulihkan', async (event) => {
+        await Livewire.dispatch('executePulihkan', {
+          rowId: event
+        });
+        Livewire.dispatch('pg:eventRefresh-aset_power_table');
+      });
+      Livewire.on('edit', (event) => {
+        $openModal('editModal');
+      });
       Livewire.on('hapus', async (event) => {
         await Livewire.dispatch('executeHapus', {
           rowId: event
         });
         Livewire.dispatch('pg:eventRefresh-aset_power_table');
+      });
+      Livewire.on('closeEditModal', () => {
+        $closeModal('editModal');
+      });
+      Livewire.on('permanenDelete', async (event) => {
+        window.$wireui.confirmDialog({
+          title: 'Permanent Delete',
+          description: 'anda yakin ? data akan dihapus dari database & tidak dapat dikembalikan',
+          icon: 'warning',
+          accept: {
+            label: 'iya',
+            execute: () => Livewire.dispatch('executePermanentHapus', {
+              rowId: event
+            })
+          },
+          reject: {
+            label: 'batal',
+          }
+        });
       });
     </script>
   @endpush
