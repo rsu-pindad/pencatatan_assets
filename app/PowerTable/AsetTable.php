@@ -109,7 +109,7 @@ final class AsetTable extends PowerGridComponent
 
     public function datasource(): Builder
     {
-        return Aset::query();
+        return Aset::query()->orderByDesc('created_at');
     }
 
     public function relationSearch(): array
