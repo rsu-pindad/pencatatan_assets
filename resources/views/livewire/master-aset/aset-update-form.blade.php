@@ -3,9 +3,10 @@
 use App\Models\TipeMerek;
 use App\Livewire\Forms\Aset\AsetUpdateForm;
 use function WireUi\Traits\WireUiActions;
-use function Livewire\Volt\{form, action, on};
+use function Livewire\Volt\{form, action, on, usesFileUploads};
 
 form(AsetUpdateForm::class);
+usesFileUploads();
 
 on([
     'edit' => function ($rowId) {
