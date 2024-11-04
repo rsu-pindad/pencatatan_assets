@@ -10,6 +10,7 @@ use App\Models\Unit;
 use App\Models\Vendor;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Number;
@@ -162,7 +163,13 @@ final class AsetTable extends PowerGridComponent
                    ->add('unit_id_formatted', function ($aset) {
                        return e($aset->parentUnit->nama_unit);
                    })
-                   ->add('image_aset');
+                   ->add('image_aset', function ($query) {
+                       if ($query->image_set != null) {
+                           return '<img class="rounded-full h-auto max-w-xs" src="' . Storage::disk('public')->url('asset_photo/' . $query->image_aset) . '" alt="' . $query->id . '">';
+                       }
+
+                       return '<img class="rounded-full h-auto max-w-xs" src="' . Storage::disk('public')->url('asset_photo/default.png') . '" alt="' . $query->id . '">';
+                   });
     }
 
     public function columns(): array

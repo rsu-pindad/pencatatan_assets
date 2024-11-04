@@ -21,7 +21,7 @@ class AsetUpdateForm extends Form
     public $vendor_id           = '';
     public $pivot_tipe_merek_id = '';
     public $unit_id             = '';
-    public $image_aset          = '';
+    public $image_aset;
 
     public function rules()
     {
@@ -102,10 +102,10 @@ class AsetUpdateForm extends Form
             } else {
                 $aset->prefix_aset = $this->prefix_aset;
             }
-            // if ($this->image_aset != null) {
-            //     $photoName = $this->image_aset->hashName();
-            //     Storage::disk('public')->putFileAs('asset_photo', $this->image_aset, $photoName);
-            // }
+            if ($this->image_aset != null) {
+                $photoName = $this->image_aset->hashName();
+                Storage::disk('public')->putFileAs('asset_photo', $this->image_aset, $photoName);
+            }
             $aset->kode_id             = $this->kode_id;
             $aset->no_bukti            = $this->no_bukti;
             $aset->nama_aset           = $this->nama_aset;
@@ -116,7 +116,7 @@ class AsetUpdateForm extends Form
             $aset->vendor_id           = $this->vendor_id;
             $aset->pivot_tipe_merek_id = $this->pivot_tipe_merek_id;
             $aset->unit_id             = $this->unit_id;
-            // $aset->image_aset          = $this->image_aset;
+            $aset->image_aset          = $photoName ?? null;
             $aset->save();
             $this->reset();
 

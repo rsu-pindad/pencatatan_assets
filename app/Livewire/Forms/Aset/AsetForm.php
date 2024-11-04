@@ -6,7 +6,6 @@ use App\Models\Aset;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Attributes\Validate;
 use Livewire\Form;
-use App\Models\Kode;
 
 class AsetForm extends Form
 {
@@ -47,7 +46,6 @@ class AsetForm extends Form
     public function store()
     {
         $this->validate();
-        // dd($this->all());
         // $extension = $this->photo->getClientOriginalExtension();
         $photoName = 'default';
         // bcadd($this->nilai,'0',2);
@@ -59,8 +57,8 @@ class AsetForm extends Form
                 $photoName = $this->photo->hashName();
                 Storage::disk('public')->putFileAs('asset_photo', $this->photo, $photoName);
             }
-            $lastPrefix = Aset::where('kode_id',$this->kode)->withTrashed()->count();
-            $newPrefix = str_pad(intval($lastPrefix) + 1, 3, 0, STR_PAD_LEFT);
+            $lastPrefix = Aset::where('kode_id', $this->kode)->withTrashed()->count();
+            $newPrefix  = str_pad(intval($lastPrefix) + 1, 3, 0, STR_PAD_LEFT);
             Aset::create([
                 'kode_id'             => $this->kode,
                 'no_bukti'            => $this->noBukti,
